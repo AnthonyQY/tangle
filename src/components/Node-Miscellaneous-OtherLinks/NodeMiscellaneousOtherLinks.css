@@ -1,0 +1,32 @@
+.node--miscellaneous--otherlinks{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    border: 2px solid #424242;
+    border-radius: 0.25rem;
+    background: #1e1e1e;
+    color: white;
+}
+
+.node--miscellaneous--otherlinks--label {
+    display: block;
+    text-align: left;
+    padding: 1vh 1vw;
+    font-size: 0.75rem;
+}
+
+.node--miscellaneous--otherlinks--line {
+    font-size: 0.65em;
+    margin-top: 0.25rem;
+    margin-bottom: 1rem;
+    padding-left: 1vw;
+    padding-right: 1vw;
+}
+
+.node--miscellaneous--otherlinks--category{
+    display: block;
+    margin: 0.25vh 0 0 0;
+    background: #424242;
+    text-align: center;
+    font-size: 0.5em;
+}

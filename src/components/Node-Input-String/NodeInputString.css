@@ -1,0 +1,34 @@
+.node--input--string {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    border: 2px solid #00897B;
+    border-radius: 0.25rem;
+    background: #1e1e1e;
+    color: white;
+}
+
+.node--input--string--label {
+    display: block;
+    text-align: left;
+    padding: 1vh 1vw;
+    font-size: 0.75rem;
+}
+
+.node--input--string--text {
+    width: auto;
+    border-radius: 1.5px;
+    border-style: none;
+    background: #3e3e42;
+    color: white;
+    margin: 0vh 1vw;
+    margin-bottom: 1vh;
+}
+
+.node--input--string--category{
+    display: block;
+    margin: 0.25vh 0 0 0;
+    background: #00897B;
+    text-align: center;
+    font-size: 0.5em;
+}

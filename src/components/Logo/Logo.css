@@ -1,0 +1,9 @@
+.logo--image {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 12.5%;
+    opacity: 50%;
+    z-index: 11;
+    pointer-events: none;
+}

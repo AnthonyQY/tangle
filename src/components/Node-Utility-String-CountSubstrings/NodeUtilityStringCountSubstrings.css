@@ -1,0 +1,48 @@
+.node--utility--string--countsubstrings {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    border: 2px solid #303F9F;
+    border-radius: 0.25rem;
+    background: #1e1e1e;
+    color: white;
+    text-align: center;
+}
+
+.node--utility--string--countsubstrings--label {
+    display: block;
+    padding-top: 1vh;
+    width: 100%;
+    font-size: 0.75rem;
+    text-align: center;
+}
+
+.node--utility--string--countsubstrings--text {
+    width: auto;
+    border-radius: 1.5px;
+    border-style: none;
+    background: #3e3e42;
+    color: white;
+    margin: 1vh 1vw;
+}
+
+.node--utility--string--countsubstrings--preview--label {
+    text-align: center;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    font-size: 0.65em;
+}
+
+.node--utility--string--countsubstrings--preview--text {
+    text-align: center;
+    font-size: 0.5em;
+    margin-top: 0;
+}
+
+.node--utility--string--countsubstrings--category {
+    display: block;
+    margin: 0.25vh 0 0 0;
+    background: #303F9F;
+    text-align: center;
+    font-size: 0.5em;
+}
