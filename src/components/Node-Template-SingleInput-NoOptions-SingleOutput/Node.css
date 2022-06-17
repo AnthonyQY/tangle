@@ -1,0 +1,61 @@
+.node {
+    --node-outline-color: #161616;
+    --node-active-outline-color: #323232; 
+
+    display: flex;
+    flex-direction: column;
+
+    height: auto;
+
+    background-color: #1e1e1e;
+    color: white;
+
+    margin: 0.25rem;
+
+    border: 2px solid var(--node-outline-color);
+    border-radius: 0.25rem;
+
+    text-align: center;
+}
+
+.node:active {
+    border: 2px solid var(--node-active-outline-color);
+}
+
+.node:hover {
+    border: 2px solid var(--node-active-outline-color);
+}
+
+.node--label {
+    display: block;
+
+    padding-top: 1vh;
+
+    font-size: 0.75em;
+}
+
+.node--preview--label {
+    font-size: 0.65em;
+}
+
+.node--preview--text {
+    margin-top: 0;
+
+    font-size: 0.5em;
+}
+
+.node--category {
+    background-color: var(--node-outline-color);
+  
+    padding: 0.1rem 2.5rem;
+
+    font-size: 0.5em;
+}
+
+.node--category:active {
+    background-color: var(--node-active-outline-color);
+}
+
+.node--category--label {
+    pointer-events: none;
+}
