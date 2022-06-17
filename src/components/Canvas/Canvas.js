@@ -1,4 +1,4 @@
-import ReactFlow, {applyNodeChanges, applyEdgeChanges, addEdge, Controls, Background, ReactFlowProvider} from 'react-flow-renderer';
+import ReactFlow, {applyNodeChanges, applyEdgeChanges, addEdge, Controls, Background, ReactFlowProvider } from 'react-flow-renderer';
 import React, { useState, useCallback, useRef, useContext, useEffect } from 'react';
 
 import {
@@ -24,6 +24,7 @@ import NodeMiscellaneousHelp from '../Node-Miscellaneous-Help/NodeMiscellaneousH
 import NodeMiscellaneousAttributions from '../Node-Miscellaneous-Attributions/NodeMiscellaneousAttributions.js';
 import NodeMiscellaneousOtherLinks from '../Node-Miscellaneous-OtherLinks/NodeMiscellaneousOtherLinks.js';
 import NodeMiscellaneousLogo from '../Node-Miscellaneous-Logo/NodeMiscellaneousLogo.js';
+import Node from '../Node-Template-SingleInput-NoOptions-SingleOutput/Node.js';
 
 import "./Canvas.css"
 
@@ -40,6 +41,7 @@ const nodeTypes = {
   NodeMiscellaneousAttributions_Type: NodeMiscellaneousAttributions,
   NodeMiscellaneousOtherLinks_Type: NodeMiscellaneousOtherLinks,
   NodeMiscellaneousLogo_Type: NodeMiscellaneousLogo,
+  Node_Type: Node,
 };
 
 export const initialNodes = [
@@ -82,6 +84,16 @@ export const initialNodes = [
       value: '',
     },
     position: { x: 385, y: 325 },
+  },
+  {
+    id: '-5',
+    type: 'Node_Type',
+    dragHandle: ".node--category",
+    data: { 
+      maxInputs: 1,
+      value: '',
+    },
+    position: { x: 800, y: 325 },
   }
 ];
 
@@ -99,6 +111,8 @@ export default function Canvas() {
   const onConnect = useCallback((connection) => setEdges((eds) => addEdge(connection, eds)), [setEdges]);
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
+
+  let MENU_ID = "CONTEXTMENU_CANVAS"
 
   const getId = () => {return `${++id}`}
 
@@ -229,7 +243,6 @@ export default function Canvas() {
     event.dataTransfer.dropEffect = 'move';
   }, []);
 
-  const MENU_ID = "NODE_MENU";
 
   function handleItemClick({ event, props, data, triggerEvent }){
     let type = data
@@ -366,22 +379,59 @@ export default function Canvas() {
     setNodes((nds) => nds.concat(newNode));
   }
 
-  const { show } = useContextMenu({
-    id: MENU_ID
-  });
+  const { show } = useContextMenu();
 
   const [clickLocationX, setClickLocationX] = useState(0)
   const [clickLocationY, setClickLocationY] = useState(0)
 
-  function displayMenu(e){
+  const [selectedNodeID, setSelectedNodeID] = useState()
+  const [selectedMultiNodeID, setSelectedMultiNodeID] = useState()
+
+  const deleteNodeByID = (id) => {
+    reactFlowInstance.setNodes(reactFlowInstance.getNodes().filter(function (node) {
+      return node.id != id
+    }))
+  };
+
+  const deleteMultiNodeByID = (ids) => {
+    reactFlowInstance.setNodes(reactFlowInstance.getNodes().filter(function (node) {
+      return !ids.includes(node.id)
+    }))
+  };
+
+  function displayContextMenuCanvas(e){
     setClickLocationX(e.clientX)
     setClickLocationY(e.clientY)
-    show(e);
+    show(e, {
+      id: "CONTEXTMENU_CANVAS"
+    })
+  }
+
+  function displayContextMenuNode(e, node){
+    setSelectedNodeID(node.id)
+    show(e, {
+      id: "CONTEXTMENU_NODE"
+    })
+  }
+
+  function displayContextMenuSelection(e, nodes){
+    setSelectedMultiNodeID(nodes.map(x => x.id))
+    show(e, {
+      id: "CONTEXTMENU_SELECTION"
+    })
+  }
+
+  const handleItemDeleteNode = () => {
+    deleteNodeByID(selectedNodeID)
+  }
+
+  const handleItemDeleteSelection = () => {
+    deleteMultiNodeByID(selectedMultiNodeID)
   }
 
   return (
     <ReactFlowProvider>
-      <Menu id={MENU_ID} theme={theme.dark} animation={{enter: animation.scale, exit: false}}>
+      <Menu id={"CONTEXTMENU_CANVAS"} theme={theme.dark} animation={{enter: animation.scale, exit: false}}>
         <Submenu label="Input">
           <Item data="NodeInputString_Type" onClick={handleItemClick}>String</Item>
         </Submenu>
@@ -416,7 +466,13 @@ export default function Canvas() {
           <Item data="NodeMiscellaneousLogo_Type" onClick={handleItemClick}>Logo</Item>
         </Submenu>
       </Menu>
-      <div className='reactflow-wrapper' ref={reactFlowWrapper} onContextMenu={displayMenu}>
+      <Menu id={"CONTEXTMENU_NODE"} theme={theme.dark} animation={{enter: animation.scale, exit: false}}>
+        <Item data="ITEM_DELETE" onClick={handleItemDeleteNode}>Delete Node</Item>
+      </Menu>
+      <Menu id={"CONTEXTMENU_SELECTION"} theme={theme.dark} animation={{enter: animation.scale, exit: false}}>
+        <Item data="ITEM_DELETE" onClick={handleItemDeleteSelection}>Delete Selection</Item>
+      </Menu>
+      <div className='reactflow-wrapper' ref={reactFlowWrapper}>
           <ReactFlow
             nodes={nodes} 
             edges={edges} 
@@ -426,6 +482,9 @@ export default function Canvas() {
             onDrop={onDrop}
             onInit={setReactFlowInstance}
             onDragOver={onDragOver}
+            onNodeContextMenu={displayContextMenuNode}
+            onSelectionContextMenu={displayContextMenuSelection}
+            onPaneContextMenu={displayContextMenuCanvas}
             nodeTypes={nodeTypes}
             fitView
           > 
