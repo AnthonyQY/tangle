@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Handle, Position, useKeyPress, useEdges, useNodes, useReactFlow, getOutgoers, getIncomers } from 'react-flow-renderer';
-import "./Node.css"
+import "./Node-String-Reverse.css"
 
 export default function NodeStringReverse({ data, id }) {
   // Data Processing
@@ -26,7 +26,7 @@ export default function NodeStringReverse({ data, id }) {
   // States
   const [componentValue, setComponentValue] = useState(data.value)
   const [componentPreview, setComponentPreview] = useState(processValue(data.value))
-
+  const [componentRadioValue, setComponentRadioValue] = useState("R")
   const [hasInput, setHasInput] = useState(false)
   const [hasOutput, setHasOutput] = useState(false)
   const [connectedOutputHandleId, setConnectedOutputHandleId] = useState()
@@ -42,7 +42,7 @@ export default function NodeStringReverse({ data, id }) {
   // Hooks
   useEffect(() => {
     localUpdate()
-  }, [enterPressed, hasInput, hasOutput])
+  }, [enterPressed, hasInput, hasOutput, componentRadioValue])
 
   useEffect(() => {
     setComponentPreview(processPreview(componentValue))
@@ -68,7 +68,7 @@ export default function NodeStringReverse({ data, id }) {
 
   // Updaters
   const updateSelf = () => {
-    setComponentValue(processValue(data.value))
+    setComponentValue(processValue(data.value, componentRadioValue))
   }
 
   const updateConnectedNodes = (value) => {
@@ -112,6 +112,10 @@ export default function NodeStringReverse({ data, id }) {
   }
 
   // Handlers
+  const handleRadioChange = (event) => {
+    setComponentRadioValue(event.target.value)
+  }
+
   const handleNewOutput = (target) => {
     setConnectedOutputHandleId(target.targetHandle)
     setHasOutput(true)
@@ -136,7 +140,7 @@ export default function NodeStringReverse({ data, id }) {
         style={inputHandleStyle}
       />
       
-      <label className="node--string--reverse--label">Change Case</label>
+      <label className="node--string--reverse--label">Reverse String</label>
       <form className="node--string--reverse--form">
         <div>
           <input id="uppercase" className="node--string--reverse--radio" name="case-type" type="radio" value="R" onChange={handleRadioChange} defaultChecked/>

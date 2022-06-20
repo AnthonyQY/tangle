@@ -181,9 +181,8 @@ export default function Canvas() {
             position,
             dragHandle: ".node--input--reverse--category",
             data: { 
-              maxInputs: 2,
-              valueA: '',
-              valueB: '',
+              maxInputs: 1,
+              value: '',
             },
           };
           break;
@@ -314,9 +313,8 @@ export default function Canvas() {
           position,
           dragHandle: ".node--input--reverse--category",
           data: { 
-            maxInputs: 2,
-            valueA: '',
-            valueB: '',
+            maxInputs: 1,
+            value: '',
           },
         };
         break;
