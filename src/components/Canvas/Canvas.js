@@ -16,6 +16,7 @@ import NodeInputString from '../Node-Input-String/NodeInputString.js';
 import NodeStringChangeCase from '../Node-String-ChangeCase/NodeStringChangeCase.js';
 import NodeOutputDisplayString from '../Node-Output-DisplayString/NodeOutputDisplayString.js';
 import NodeStringCombine from '../Node-String-Combine/NodeStringCombine.js';
+import NodeStringReverse from '../Node-String-Reverse/NodeStringReverse.js';
 import NodeCryptographyCipherROT13 from '../Node-Cryptography-Cipher-ROT13/NodeCryptographyCipherROT13.js';
 import NodeCryptographyHashSHA256 from '../Node-Cryptography-Hash-SHA256/NodeCryptographyHashSHA256.js';
 import NodeCryptographyEncodingHexadecimal from '../Node-Cryptography-Encoding-Hexadecimal/NodeCryptographyEncodingHexadecimal.js';
@@ -33,6 +34,7 @@ const nodeTypes = {
   NodeStringChangeCase_Type: NodeStringChangeCase, 
   NodeOutputDisplayString_Type: NodeOutputDisplayString,
   NodeStringCombine_Type : NodeStringCombine,
+  NodeStringReverse_Type : NodeStringReverse,
   NodeCryptographyCipherROT13_Type: NodeCryptographyCipherROT13,
   NodeCryptographyHashSHA256_Type: NodeCryptographyHashSHA256,
   NodeCryptographyEncodingHexadecimal_Type: NodeCryptographyEncodingHexadecimal,
@@ -172,6 +174,18 @@ export default function Canvas() {
             },
           };
           break;
+        case "NodeStringReverse_Type":
+          newNode = {
+            id: getId(),
+            type,
+            position,
+            dragHandle: ".node--input--reverse--category",
+            data: { 
+              maxInputs: 1,
+              value: '',
+            },
+          };
+          break;
         case "NodeCryptographyCipherROT13_Type":
           newNode = {
             id: getId(),
@@ -289,6 +303,18 @@ export default function Canvas() {
             maxInputs: 2,
             valueA: '',
             valueB: '',
+          },
+        };
+        break;
+      case "NodeStringReverse_Type":
+        newNode = {
+          id: getId(),
+          type,
+          position,
+          dragHandle: ".node--input--reverse--category",
+          data: { 
+            maxInputs: 1,
+            value: '',
           },
         };
         break;
@@ -441,6 +467,7 @@ export default function Canvas() {
         <Submenu label="Manipulation">
           <Item data="NodeStringChangeCase_Type" onClick={handleItemClick}>Change Case</Item>
           <Item data="NodeStringCombine_Type" onClick={handleItemClick}>Combine</Item>
+          <Item data="NodeStringReverse_Type" onClick={handleItemClick}>Reverse</Item>
         </Submenu>
         <Submenu label="Cryptography">
           <Submenu label="Cipher">
