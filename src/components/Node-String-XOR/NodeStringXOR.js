@@ -5,14 +5,14 @@ import "./NodeStringXOR.css"
 
 function NodeStringXOR({ data, id }) {
     // default XOR string
-    const xorString = 0x00000000;
+    const xorString = 1001;
     // Options
     const processValue = ((stringData, encryptData, radioValue) => {
         switch(radioValue) {
             case "X":
                 return stringData ^ encryptData;
             default:
-                return parseInt(stringData, 16);
+                return stringData;
         }
     })
 
@@ -29,7 +29,7 @@ function NodeStringXOR({ data, id }) {
 
     // States
     const [componentValue, setComponentValue] = useState(data.value)
-    const [componentRadioValue, setComponentRadioValue] = useState("X")
+    const [componentRadioValue, setComponentRadioValue] = useState("N")
     const [componentPreview, setComponentPreview] = useState(processValue(componentValue, xorString, componentRadioValue))
     const [hasInput, setHasInput] = useState(false)
     const [hasOutput, setHasOutput] = useState(false)
@@ -144,11 +144,11 @@ function NodeStringXOR({ data, id }) {
       <label className="node--string--xor--label">Apply XOR</label>
       <form className="node--string--xor--form">
         <div>
-          <input id="XOR" className="node--string--xor--radio" name="case-type" type="radio" value="X" onChange={handleRadioChange} defaultChecked/>
+          <input id="XOR" className="node--string--xor--radio" name="case-type" type="radio" value="X" onChange={handleRadioChange}/>
           <label className="node--string--xor--radio--label" htmlFor="XOR">XOR</label>
         </div>
         <div>
-          <input id="nop" className="node--string--xor--radio" name="case-type" type="radio" value="N" onChange={handleRadioChange} />
+          <input id="nop" className="node--string--xor--radio" name="case-type" type="radio" value="N" onChange={handleRadioChange} defaultChecked/>
           <label className="node--string--xor--radio--label" htmlFor="nop">No Operation</label>
         </div>
       </form>
