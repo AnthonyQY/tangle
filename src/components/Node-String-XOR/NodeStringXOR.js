@@ -1,16 +1,18 @@
 import { useState, useEffect, useInsertionEffect } from 'react';
 import { Handle, Position, useKeyPress, useEdges, useNodes, useReactFlow, getOutgoers, getIncomers } from 'react-flow-renderer';
 
-import "./NodeManipulationXOR.css"
+import "./NodeStringXOR.css"
 
-function NodeManipulationXOR({ data, id }) {
-    // options (skip for now)
+function NodeStringXOR({ data, id }) {
+    // default XOR string
+    const xorString = 0x00000000;
+    // Options
     const processValue = ((stringData, encryptData, radioValue) => {
         switch(radioValue) {
             case "X":
                 return stringData ^ encryptData;
             default:
-                return stringData;
+                return parseInt(stringData, 16);
         }
     })
 
@@ -27,8 +29,8 @@ function NodeManipulationXOR({ data, id }) {
 
     // States
     const [componentValue, setComponentValue] = useState(data.value)
-    const [componentRadioValue, setComponentRadioValue] = useState("N")
-    const [componentPreview, setComponentPreview] = useState(processValue(componentValue, componentRadioValue))
+    const [componentRadioValue, setComponentRadioValue] = useState("X")
+    const [componentPreview, setComponentPreview] = useState(processValue(componentValue, xorString, componentRadioValue))
     const [hasInput, setHasInput] = useState(false)
     const [hasOutput, setHasOutput] = useState(false)
     const enterPressed = useKeyPress('Enter');
@@ -44,7 +46,7 @@ function NodeManipulationXOR({ data, id }) {
 
     useEffect(() => {
         setComponentPreview(processPreview(componentValue))
-        if(hasoutput){
+        if(hasOutput){
             updateConnectedNodes(componentValue)
         }
     }, [componentValue])
@@ -55,21 +57,21 @@ function NodeManipulationXOR({ data, id }) {
             localUpdate()
         }, 1000);
 
-        return () => cleanInterval(interval);
+        return () => clearInterval(interval);
     }, [])
 
     const localUpdate = () => {
         updateConnections()
         updateSelf()
-        updateConnectNodes(componentValue)
+        updateConnectedNodes(componentValue)
     }
 
     // Updaters
     function updateSelf(){
-        setComponentValue(processValue(data.value, componentRadioValue))
+        setComponentValue(processValue(data.value, xorString, componentRadioValue))
     }
 
-    const updateConnectNodes = (value) => {
+    const updateConnectedNodes = (value) => {
         let targetNodes = getOutgoers(reactFlow.getNode(id), allNodes, allEdges)
         targetNodes.forEach(node =>
             executeTargetNodeUpdate(node, value)
@@ -119,6 +121,54 @@ function NodeManipulationXOR({ data, id }) {
         setConnectedOutputHandleId(target.targetHandle)
         setHasOutput(true)
     }
+
+    // Styles
+  const inputHandleStyle = {
+    left: 1,
+  }
+  const outputHandleStyle = {
+    right: -11.25,
+  }
+
+
+  return (
+    <div className="node--string--xor">
+      <Handle 
+        type="target" 
+        position={Position.Left} 
+        className={"input-string"}
+        isConnectable={hasInput === false}
+        style={inputHandleStyle}
+      />
+      
+      <label className="node--string--xor--label">Apply XOR</label>
+      <form className="node--string--xor--form">
+        <div>
+          <input id="XOR" className="node--string--xor--radio" name="case-type" type="radio" value="X" onChange={handleRadioChange} defaultChecked/>
+          <label className="node--string--xor--radio--label" htmlFor="XOR">XOR</label>
+        </div>
+        <div>
+          <input id="nop" className="node--string--xor--radio" name="case-type" type="radio" value="N" onChange={handleRadioChange} />
+          <label className="node--string--xor--radio--label" htmlFor="nop">No Operation</label>
+        </div>
+      </form>
+      <div className="node--string--xor--preview">
+        <label className="node--string--xor--preview--label">Output Preview</label>
+        <p className="node--string--xor--preview--text">{componentPreview}</p>
+      </div>
+      <div className="node--input--xor--category">
+        <label className="node--input--xor--category--label">MANIPULATION</label>
+      </div>
+      <Handle 
+        type="source" 
+        position={Position.Right} 
+        id="output-string" 
+        isConnectable={true}
+        onConnect={handleNewOutput}
+        style = {outputHandleStyle}
+      />
+    </div>
+  );
 }
 
-export default NodeManipulationXOR;
+export default NodeStringXOR;

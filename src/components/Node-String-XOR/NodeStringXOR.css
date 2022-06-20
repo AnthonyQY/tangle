@@ -1,4 +1,4 @@
-.node--string--changecase {
+.node--string--xor {
     display: flex;
     flex-direction: column;
     height: auto;
@@ -11,7 +11,7 @@
     text-align: center;
 }
 
-.node--string--changecase--label {
+.node--string--xor--label {
     display: block;
     text-align: center;
     padding-top: 1vh;
@@ -19,35 +19,35 @@
     font-size: 0.75rem;
 }
 
-.node--string--changecase--form {
+.node--string--xor--form {
     text-align: left;
     margin-left: 1vw;
 }
 
-.node--string--changecase--radio {
+.node--string--xor--radio {
     display: inline;
     text-align: left;
     transform: scale(0.5);
 }
 
-.node--string--changecase--radio--label {
+.node--string--xor--radio--label {
     font-size: 0.5rem;
 }
 
-.node--string--changecase--preview--label {
+.node--string--xor--preview--label {
     text-align: center;
     padding-left: 1vw;
     padding-right: 1vw;
     font-size: 0.65em;
 }
 
-.node--string--changecase--preview--text {
+.node--string--xor--preview--text {
     text-align: center;
     font-size: 0.5em;
     margin-top: 0;
 }
 
-.node--input--changecase--category{
+.node--input--xor--category{
     display: block;
     text-align: center;
     margin: 0.25vh 0 0 0;
