@@ -1,12 +1,19 @@
 import { useState, useEffect } from 'react';
 import { Handle, Position, useKeyPress, useEdges, useNodes, useReactFlow, getOutgoers, getIncomers } from 'react-flow-renderer';
-import "./NodeStringReverse.css"
+import "./NodeCryptographyEncodingAtbash.css"
 
-export default function NodeStringReverse({ data, id }) {
+export default function NodeCryptographyEncodingAtbash({ data, id }) {
   // Data Processing
   const processValue = ((stringData, radioValue) => {
     switch(radioValue) {
-      case "R":
+      case "E":
+        var arr = [];
+        for (var i=0;i<stringData.length; i++){
+          const ascii = stringData.charCodeAt(i);
+          const cond1 = (ascii>65 && ascii<90)
+          const cond2 = (ascii>97 && ascii<122)
+          arr[i] = String.fromCharCode((cond1 ? 90-ascii+65 : (cond2 ? 122-ascii+97 : ascii)));
+        }
         return stringData.split('').reverse().join('');
       default:
         return stringData;
@@ -26,7 +33,7 @@ export default function NodeStringReverse({ data, id }) {
   // States
   const [componentValue, setComponentValue] = useState(data.value)
   const [componentPreview, setComponentPreview] = useState(processValue(data.value))
-  const [componentRadioValue, setComponentRadioValue] = useState("R")
+  const [componentRadioValue, setComponentRadioValue] = useState("E")
   const [hasInput, setHasInput] = useState(false)
   const [hasOutput, setHasOutput] = useState(false)
   const [connectedOutputHandleId, setConnectedOutputHandleId] = useState()
@@ -131,7 +138,7 @@ export default function NodeStringReverse({ data, id }) {
 
 
   return (
-    <div className="node--string--reverse">
+    <div className="node--cryptography--encoding--atbash">
       <Handle 
         type="target" 
         position={Position.Left} 
@@ -140,23 +147,23 @@ export default function NodeStringReverse({ data, id }) {
         style={inputHandleStyle}
       />
       
-      <label className="node--string--reverse--label">Reverse String</label>
-      <form className="node--string--reverse--form">
+      <label className="node--cryptography--encoding--atbash--label">Atbash</label>
+      <form className="node--cryptography--encoding--atbash--form">
         <div>
-          <input id="uppercase" className="node--string--reverse--radio" name="case-type" type="radio" value="R" onChange={handleRadioChange} defaultChecked/>
-          <label className="node--string--reverse--radio--label" htmlFor="reverse">Reverse</label>
+          <input id="encode" className="node--cryptography--encoding--atbash--radio" name="op-type" type="radio" value="E" onChange={handleRadioChange} defaultChecked/>
+          <label className="node--cryptography--encoding--atbash--radio--label" htmlFor="encode">Encode/Decode</label>
         </div>
         <div>
-          <input id="nop" className="node--string--reverse--radio" name="case-type" type="radio" value="N" onChange={handleRadioChange} />
-          <label className="node--string--reverse--radio--label" htmlFor="nop">No Operation</label>
+          <input id="nop" className="node--cryptography--encoding--atbash--radio" name="op-type" type="radio" value="N" onChange={handleRadioChange}/>
+          <label className="node--cryptography--encoding--atbash--radio--label" htmlFor="nop">No Operation</label>
         </div>
       </form>
-      <div className="node--string--reverse--preview">
-        <label className="node--string--reverse--preview--label">Output Preview</label>
-        <p className="node--string--reverse--preview--text">{componentPreview}</p>
+      <div className="node--cryptography--encoding--atbash--preview">
+        <label className="node--cryptography--encoding--atbash--preview--label">Output Preview</label>
+        <p className="node--cryptography--encoding--atbash--preview--text">{componentPreview}</p>
       </div>
-      <div className="node--input--reverse--category">
-        <label className="node--input--reverse--category--label">MANIPULATION</label>
+      <div className="node--cryptography--encoding--atbash--category">
+        <label className="node--cryptography--encoding--atbash--category--label">CRYPTOGRAPHY</label>
       </div>
       <Handle 
         type="source" 
