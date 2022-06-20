@@ -36,7 +36,7 @@ function NodeCryptographyEncodingHexadecimal({ data, id }) {
 
   // States
   const [componentValue, setComponentValue] = useState(data.value)
-  const [componentRadioValue, setComponentRadioValue] = useState("N")
+  const [componentRadioValue, setComponentRadioValue] = useState("E")
   const [componentPreview, setComponentPreview] = useState(processValue(componentValue, componentRadioValue))
   const [hasInput, setHasInput] = useState(false)
   const [hasOutput, setHasOutput] = useState(false)
@@ -48,8 +48,7 @@ function NodeCryptographyEncodingHexadecimal({ data, id }) {
 
   // Hooks
   useEffect(() => {
-    updateConnections()
-    updateSelf()
+    localUpdate()
   }, [enterPressed, hasInput, hasOutput, componentRadioValue])
 
   useEffect(() => {
@@ -152,7 +151,7 @@ function NodeCryptographyEncodingHexadecimal({ data, id }) {
       <label className="node--cryptography--encoding--hexadecimal--label">Hexadecimal</label>
       <form className="node--cryptography--encoding--hexadecimal--form">
         <div>
-          <input id="encode" className="node--cryptography--encoding--hexadecimal--radio" name="op-type" type="radio" value="E" onChange={handleRadioChange}/>
+          <input id="encode" className="node--cryptography--encoding--hexadecimal--radio" name="op-type" type="radio" value="E" onChange={handleRadioChange} defaultChecked/>
           <label className="node--cryptography--encoding--hexadecimal--radio--label" htmlFor="encode">Encode</label>
         </div>
         <div>
@@ -160,7 +159,7 @@ function NodeCryptographyEncodingHexadecimal({ data, id }) {
           <label className="node--cryptography--encoding--hexadecimal--radio--label" htmlFor="decode">Decode</label>
         </div>
         <div>
-          <input id="nop" className="node--cryptography--encoding--hexadecimal--radio" name="op-type" type="radio" value="N" onChange={handleRadioChange} defaultChecked/>
+          <input id="nop" className="node--cryptography--encoding--hexadecimal--radio" name="op-type" type="radio" value="N" onChange={handleRadioChange}/>
           <label className="node--cryptography--encoding--hexadecimal--radio--label" htmlFor="nop">No Operation</label>
         </div>
       </form>
