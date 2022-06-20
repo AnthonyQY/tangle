@@ -20,6 +20,7 @@ import NodeStringReverse from '../Node-String-Reverse/NodeStringReverse.js';
 import NodeCryptographyCipherROT13 from '../Node-Cryptography-Cipher-ROT13/NodeCryptographyCipherROT13.js';
 import NodeCryptographyHashSHA256 from '../Node-Cryptography-Hash-SHA256/NodeCryptographyHashSHA256.js';
 import NodeCryptographyEncodingHexadecimal from '../Node-Cryptography-Encoding-Hexadecimal/NodeCryptographyEncodingHexadecimal.js';
+import NodeCryptographyEncodingAtbash from '../Node-Cryptography-Encoding-Atbash/NodeCryptographyEncodingAtbash.js';
 import NodeUtilityStringCountSubstrings from '../Node-Utility-String-CountSubstrings/NodeUtilityStringCountSubstrings.js';
 import NodeMiscellaneousHelp from '../Node-Miscellaneous-Help/NodeMiscellaneousHelp.js';
 import NodeMiscellaneousAttributions from '../Node-Miscellaneous-Attributions/NodeMiscellaneousAttributions.js';
@@ -38,6 +39,7 @@ const nodeTypes = {
   NodeCryptographyCipherROT13_Type: NodeCryptographyCipherROT13,
   NodeCryptographyHashSHA256_Type: NodeCryptographyHashSHA256,
   NodeCryptographyEncodingHexadecimal_Type: NodeCryptographyEncodingHexadecimal,
+  NodeCryptographyEncodingAtbash_Type: NodeCryptographyEncodingAtbash, 
   NodeUtilityStringCountSubstrings_Type: NodeUtilityStringCountSubstrings,
   NodeMiscellaneousHelp_Type: NodeMiscellaneousHelp,
   NodeMiscellaneousAttributions_Type: NodeMiscellaneousAttributions,
@@ -234,6 +236,18 @@ export default function Canvas() {
             },
           };
           break;
+        case "NodeCryptographyEncodingAtbash_Type":
+          newNode = {
+            id: getId(),
+            type,
+            position,
+            dragHandle: ".node--cryptography--encoding--atbash--category",
+            data: { 
+              maxInputs: 1,
+              value: "" 
+            },
+          };
+          break;
         default:
           newNode = {
             id: getId(),
@@ -366,6 +380,18 @@ export default function Canvas() {
           },
         };
         break;
+      case "NodeCryptographyEncodingAtbash_Type":
+        newNode = {
+          id: getId(),
+          type,
+          position,
+          dragHandle: ".node--cryptography--encoding--atbash--category",
+          data: { 
+            maxInputs: 1,
+            value: "" 
+          },
+        };
+        break;
       case "NodeUtilityStringCountSubstrings_Type":
         newNode = {
           id: getId(),
@@ -477,7 +503,8 @@ export default function Canvas() {
             
           </Submenu>
           <Submenu label="Encoding">
-          <Item data="NodeCryptographyEncodingHexadecimal_Type" onClick={handleItemClick}>Hexadecimal</Item>
+            <Item data="NodeCryptographyEncodingHexadecimal_Type" onClick={handleItemClick}>Hexadecimal</Item>
+            <Item data="NodeCryptographyEncodingAtbash_Type" onClick={handleItemClick}>Atbash</Item>
           </Submenu>
           <Submenu label="Hashing">
             <Item data="NodeCryptographyHashSHA256_Type" onClick={handleItemClick}>SHA-256</Item>
