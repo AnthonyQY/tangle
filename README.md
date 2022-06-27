@@ -1,7 +1,6 @@
 
 ![Logo](https://i.ibb.co/tXSpHh4/Logo-Dark-Small.png)
-
-<p align="center">A simple, user-friendly node graph for exploring cryptography and ciphers.</p>
+A simple, user-friendly node graph for exploring cryptography and ciphers.
 
 ## Demo
 
