@@ -1,5 +1,10 @@
 
 ![Logo](https://i.ibb.co/tXSpHh4/Logo-Dark-Small.png)
+
+<div align="center">
+ <a href="">![GitHub](https://img.shields.io/github/license/LoliTechnologies/tangle)</a>
+</div>
+
 A simple, user-friendly node graph for exploring cryptography and ciphers.
 
 ## Demo
