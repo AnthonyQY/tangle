@@ -1,6 +1,6 @@
 .node {
-    --node-outline-color: #161616;
-    --node-active-outline-color: #323232; 
+    --node-outline-color: #C62B2B;
+    --node-active-outline-color: #d15555; 
 
     display: flex;
     flex-direction: column;
@@ -26,25 +26,15 @@
     border: 2px solid var(--node-active-outline-color);
 }
 
-.node--label {
+.node_label {
     display: block;
 
-    padding-top: 1vh;
+    padding-top: 0.5rem;
 
     font-size: 0.75em;
 }
 
-.node--preview--label {
-    font-size: 0.65em;
-}
-
-.node--preview--text {
-    margin-top: 0;
-
-    font-size: 0.5em;
-}
-
-.node--category {
+.node_category {
     background-color: var(--node-outline-color);
   
     padding: 0.1rem 2.5rem;
@@ -52,25 +42,19 @@
     font-size: 0.5em;
 }
 
-.node--category:active {
+.node_category:active {
     background-color: var(--node-active-outline-color);
 }
 
-.node--category--label {
+.node_category_label {
     pointer-events: none;
 }
 
-.node--form {
-    text-align: left;
-    margin: 0 auto;
-}
-
-.node--form--radio {
-    display: inline;
-    text-align: left;
-    transform: scale(0.5);
-}
-
-.node--radio--label {
-    font-size: 0.5rem;
+.node_text {
+    width: auto;
+    border-radius: 1.5px;
+    border-style: none;
+    background: #3e3e42;
+    color: white;
+    margin: 0.5rem 1rem;
 }

@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Handle, Position, useKeyPress, useEdges, useNodes, useReactFlow, getOutgoers, getIncomers } from 'react-flow-renderer';
 
-import "./NodeCryptographyHashSHA256.css"
+import styles from "./Node.module.css"
 
-function NodeCryptographyHashSHA256({ data, id }) {
-  // Utility
+export default function NodeManipulationReverse({ data, id }) {
+  // Data Processing
   const processValue = ((stringData) => {
-    var shajs = require('sha.js')
-    return shajs('sha256').update(stringData).digest('hex');
+    switch(componentRadioValue) {
+      case "A":
+        return [...stringData].reverse().join("");
+      default:
+        return stringData;
+    }
   })
 
   const processPreview = (stringData) => {
@@ -22,19 +26,24 @@ function NodeCryptographyHashSHA256({ data, id }) {
 
   // States
   const [componentValue, setComponentValue] = useState(data.value)
-  const [componentPreview, setComponentPreview] = useState()
+  const [componentRadioValue, setComponentRadioValue] = useState("A")
+  const [componentPreview, setComponentPreview] = useState(processValue(data.value))
+
   const [hasInput, setHasInput] = useState(false)
   const [hasOutput, setHasOutput] = useState(false)
-  const enterPressed = useKeyPress('Enter');
+  const [connectedOutputHandleId, setConnectedOutputHandleId] = useState()
+
+  const [autoUpdateInterval, setAutoUpdateInterval] = useState(1000)
+
   const allNodes = useNodes()
   const allEdges = useEdges()
   const reactFlow = useReactFlow();
-
+  const enterPressed = useKeyPress('Enter');
 
   // Hooks
   useEffect(() => {
     localUpdate()
-  }, [enterPressed, hasInput, hasOutput])
+  }, [enterPressed, hasInput, hasOutput, componentRadioValue])
 
   useEffect(() => {
     setComponentPreview(processPreview(componentValue))
@@ -43,11 +52,11 @@ function NodeCryptographyHashSHA256({ data, id }) {
     }
   }, [componentValue])
 
-  // Auto-Updaters
+  // Auto-Updater
   useEffect(() => {
     const interval = setInterval(() => {
       localUpdate()
-    }, 1000);
+    }, autoUpdateInterval);
   
     return () => clearInterval(interval);
   }, [])
@@ -59,12 +68,8 @@ function NodeCryptographyHashSHA256({ data, id }) {
   }  
 
   // Updaters
-  function updateSelf(){
-    if(data.value !== ""){
-      setComponentValue(processValue(data.value))
-    } else{
-      setComponentValue("")
-    }
+  const updateSelf = () => {
+    setComponentValue(processValue(data.value))
   }
 
   const updateConnectedNodes = (value) => {
@@ -74,7 +79,6 @@ function NodeCryptographyHashSHA256({ data, id }) {
     )
   }
 
-  const [connectedOutputHandleId, setConnectedOutputHandleId] = useState()
   const executeTargetNodeUpdate = (targetNode, value) => {
     if(targetNode.data.maxInputs === 1){
       targetNode.data.value = value
@@ -93,7 +97,7 @@ function NodeCryptographyHashSHA256({ data, id }) {
     }
   }
 
-  function updateConnections(){
+  const updateConnections = () => {
     if(getIncomers(reactFlow.getNode(id), allNodes, allEdges).length > 0){
       setHasInput(true)
     }
@@ -113,33 +117,54 @@ function NodeCryptographyHashSHA256({ data, id }) {
     setConnectedOutputHandleId(target.targetHandle)
     setHasOutput(true)
   }
+
+  const handleRadioChange = (event) => {
+    setComponentRadioValue(event.target.value)
+  }
+
+  // Styles
   const inputHandleStyle = {
     left: 1,
   }
   const outputHandleStyle = {
-    right: -11.25,
+    right: 0.65,
   }
+
+  // Return
   return (
-    <div className="node--cryptography--hash--sha256">
+    <div className={styles.node}>
       <Handle 
+        id="a"
         type="target" 
         position={Position.Left} 
         className={"input-string"}
         isConnectable={hasInput === false}
         style={inputHandleStyle}
       />
-      <label className="node--cryptography--hash--sha256--label">SHA256 Hash</label>
-      <div className="node--cryptography--hash--sha256--preview">
-        <label className="node--cryptography--hash--sha256--preview--label">Output Preview</label>
-        <p className="node--cryptography--hash--sha256--preview--text">{componentPreview}</p>
+      <label className={styles.node_label}>Reverse String</label>
+      <form className={styles.node_form}>
+        <div>
+          <input id="optionA" className={styles.node_form_radio} name="case-type" type="radio" value="A" onChange={handleRadioChange} defaultChecked/>
+          <label className={styles.node_radio_label} htmlFor="optionA">Reverse</label>
+        </div>
+        <div>
+          <input id="nop" className={styles.node_form_radio} name="case-type" type="radio" value="N" onChange={handleRadioChange} />
+          <label className={styles.node_radio_label} htmlFor="nop">No Operation</label>
+        </div>
+      </form>
+      <div className={styles.node_preview}>
+        <label className={styles.node_preview_label}>Output Preview</label>
+        <p className={styles.node_preview_text}>{componentPreview}</p>
       </div>
-      <div className="node--cryptography--hash--sha256--category">
-        <label className="node--cryptography--hash-sha256--category--label">CRYPTOGRAPHY</label>
+      <div className="category_wrapper">
+        <div className={styles.node_category}>
+          <label className={styles.node_category_label}>TEMPLATE</label>
+        </div>
       </div>
       <Handle 
+        id="output" 
         type="source" 
         position={Position.Right} 
-        id="output-string" 
         isConnectable={true}
         onConnect={handleNewOutput}
         style = {outputHandleStyle}
@@ -147,5 +172,3 @@ function NodeCryptographyHashSHA256({ data, id }) {
     </div>
   );
 }
-
-export default NodeCryptographyHashSHA256;

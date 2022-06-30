@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Handle, Position, useKeyPress, getIncomers, allEdges, useReactFlow, useNodes, useEdges } from 'react-flow-renderer';
+import { Handle, Position, useKeyPress, useEdges, useNodes, useReactFlow, getOutgoers, getIncomers } from 'react-flow-renderer';
 
-import "./NodeOutputDisplayString.css"
+import styles from "./Node.module.css"
 
-function NodeOutputDisplayString({ data, id }) {
+export default function NodeOutputString({ data, id }) {
   // States
   const [componentValue, setComponentValue] = useState(data.value);
   const [hasInput, setHasInput] = useState(false);
@@ -16,7 +16,6 @@ function NodeOutputDisplayString({ data, id }) {
   useEffect(() => {
     localUpdate()
   }, [componentValue, hasInput, enterPressed]);
-
 
   // Auto-Updaters
   useEffect(() => {
@@ -46,21 +45,30 @@ function NodeOutputDisplayString({ data, id }) {
     }
   }
 
+  // Styles
+  const inputHandleStyle = {
+    left: 0.65,
+  }
+
   return (
-    <div className="node--output--displaystring">
+    <div className={styles.node}>
+
       <Handle 
         type="target" 
         position={Position.Left} 
         id="input-string" 
         isConnectable={(hasInput === false)}
+        style = {inputHandleStyle}
       />
-      <label className="node--output--displaystring--label"htmlFor="text">Display String</label>
-      <input id="text" className="node--output--string--text" name="text" value={componentValue} readOnly/>
-      <div className="node--output--string--category">
-        <label className="node--output--string--category--label">OUTPUT</label>
+
+      <label className={styles.node_label} htmlFor="text">Display String</label>
+      <input id="text" className={styles.node_text} name="text" value={componentValue} readOnly/>
+      <div className="category_wrapper">
+        <div className={styles.node_category}>
+          <label className={styles.node_category_label}>INPUT</label>
+        </div>
       </div>
+
     </div>
   );
 }
-
-export default NodeOutputDisplayString;

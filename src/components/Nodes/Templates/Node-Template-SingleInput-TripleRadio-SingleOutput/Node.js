@@ -1,12 +1,20 @@
 import { useState, useEffect } from 'react';
 import { Handle, Position, useKeyPress, useEdges, useNodes, useReactFlow, getOutgoers, getIncomers } from 'react-flow-renderer';
-import "./Node.css"
+
+import styles from "./Node.module.css"
 
 export default function Node({ data, id }) {
   // Data Processing
-  const processValue = (stringData) => {
-    return stringData
-  }
+  const processValue = ((stringData) => {
+    switch(componentRadioValue) {
+      case "A":
+        return stringData.toUpperCase();
+      case "B":
+        return stringData.toLowerCase();
+      default:
+        return stringData;
+    }
+  })
 
   const processPreview = (stringData) => {
     if(stringData.length === 0) {
@@ -20,6 +28,7 @@ export default function Node({ data, id }) {
 
   // States
   const [componentValue, setComponentValue] = useState(data.value)
+  const [componentRadioValue, setComponentRadioValue] = useState("A")
   const [componentPreview, setComponentPreview] = useState(processValue(data.value))
 
   const [hasInput, setHasInput] = useState(false)
@@ -28,16 +37,15 @@ export default function Node({ data, id }) {
 
   const [autoUpdateInterval, setAutoUpdateInterval] = useState(1000)
 
-  const enterPressed = useKeyPress('Enter');
   const allNodes = useNodes()
   const allEdges = useEdges()
   const reactFlow = useReactFlow();
-
+  const enterPressed = useKeyPress('Enter');
 
   // Hooks
   useEffect(() => {
     localUpdate()
-  }, [enterPressed, hasInput, hasOutput])
+  }, [enterPressed, hasInput, hasOutput, componentRadioValue])
 
   useEffect(() => {
     setComponentPreview(processPreview(componentValue))
@@ -112,6 +120,10 @@ export default function Node({ data, id }) {
     setHasOutput(true)
   }
 
+  const handleRadioChange = (event) => {
+    setComponentRadioValue(event.target.value)
+  }
+
   // Styles
   const inputHandleStyle = {
     left: 1,
@@ -122,7 +134,7 @@ export default function Node({ data, id }) {
 
   // Return
   return (
-    <div className="node">
+    <div className={styles.node}>
       <Handle 
         id="a"
         type="target" 
@@ -131,13 +143,29 @@ export default function Node({ data, id }) {
         isConnectable={hasInput === false}
         style={inputHandleStyle}
       />
-      <label className="node--label">Template</label>
-      <div className="node--preview">
-        <label className="node--preview--label">Output Preview</label>
-        <p className="node--preview--text">{componentPreview}</p>
+      <label className={styles.node_label}>Template</label>
+      <form className={styles.node_form}>
+        <div>
+          <input id="optionA" className={styles.node_form_radio} name="case-type" type="radio" value="A" onChange={handleRadioChange} defaultChecked/>
+          <label className={styles.node_radio_label} htmlFor="optionA">Option A</label>
+        </div>
+        <div>
+          <input id="optionB" className={styles.node_form_radio} name="case-type" type="radio" value="B" onChange={handleRadioChange}/>
+          <label className={styles.node_radio_label} htmlFor="optionB">Option B</label>
+        </div>
+        <div>
+          <input id="nop" className={styles.node_form_radio} name="case-type" type="radio" value="N" onChange={handleRadioChange} />
+          <label className={styles.node_radio_label} htmlFor="nop">No Operation</label>
+        </div>
+      </form>
+      <div className={styles.node_preview}>
+        <label className={styles.node_preview_label}>Output Preview</label>
+        <p className={styles.node_preview_text}>{componentPreview}</p>
       </div>
-      <div className="node--category">
-        <label className="node--category--label">TEMPLATE</label>
+      <div className="category_wrapper">
+        <div className={styles.node_category}>
+          <label className={styles.node_category_label}>TEMPLATE</label>
+        </div>
       </div>
       <Handle 
         id="output" 
