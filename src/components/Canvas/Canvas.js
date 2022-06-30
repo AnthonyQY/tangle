@@ -1,52 +1,11 @@
 import ReactFlow, {applyNodeChanges, applyEdgeChanges, addEdge, Controls, Background, ReactFlowProvider } from 'react-flow-renderer';
 import React, { useState, useCallback, useRef, useContext, useEffect } from 'react';
+import { NodeTypes, GetNodeByType } from '../Registry/Registry.js';
 
-import {
-  Menu,
-  Item,
-  Separator,
-  Submenu,
-  useContextMenu,
-  theme,
-  animation,
-} from "react-contexify";
+import { Menu, Item, Submenu, useContextMenu, theme, animation } from "react-contexify";
 import "react-contexify/dist/ReactContexify.css";
 
-import NodeInputString from '../Node-Input-String/NodeInputString.js';
-import NodeStringChangeCase from '../Node-String-ChangeCase/NodeStringChangeCase.js';
-import NodeOutputDisplayString from '../Node-Output-DisplayString/NodeOutputDisplayString.js';
-import NodeStringCombine from '../Node-String-Combine/NodeStringCombine.js';
-import NodeStringReverse from '../Node-String-Reverse/NodeStringReverse.js';
-import NodeCryptographyCipherROT13 from '../Node-Cryptography-Cipher-ROT13/NodeCryptographyCipherROT13.js';
-import NodeCryptographyHashSHA256 from '../Node-Cryptography-Hash-SHA256/NodeCryptographyHashSHA256.js';
-import NodeCryptographyEncodingHexadecimal from '../Node-Cryptography-Encoding-Hexadecimal/NodeCryptographyEncodingHexadecimal.js';
-import NodeCryptographyEncodingAtbash from '../Node-Cryptography-Encoding-Atbash/NodeCryptographyEncodingAtbash.js';
-import NodeUtilityStringCountSubstrings from '../Node-Utility-String-CountSubstrings/NodeUtilityStringCountSubstrings.js';
-import NodeMiscellaneousHelp from '../Node-Miscellaneous-Help/NodeMiscellaneousHelp.js';
-import NodeMiscellaneousAttributions from '../Node-Miscellaneous-Attributions/NodeMiscellaneousAttributions.js';
-import NodeMiscellaneousOtherLinks from '../Node-Miscellaneous-OtherLinks/NodeMiscellaneousOtherLinks.js';
-import NodeMiscellaneousLogo from '../Node-Miscellaneous-Logo/NodeMiscellaneousLogo.js';
-import Node from '../Node-Template-SingleInput-NoOptions-SingleOutput/Node.js';
-
 import "./Canvas.css"
-
-const nodeTypes = { 
-  NodeInputString_Type: NodeInputString,
-  NodeStringChangeCase_Type: NodeStringChangeCase, 
-  NodeOutputDisplayString_Type: NodeOutputDisplayString,
-  NodeStringCombine_Type : NodeStringCombine,
-  NodeStringReverse_Type : NodeStringReverse,
-  NodeCryptographyCipherROT13_Type: NodeCryptographyCipherROT13,
-  NodeCryptographyHashSHA256_Type: NodeCryptographyHashSHA256,
-  NodeCryptographyEncodingHexadecimal_Type: NodeCryptographyEncodingHexadecimal,
-  NodeCryptographyEncodingAtbash_Type: NodeCryptographyEncodingAtbash, 
-  NodeUtilityStringCountSubstrings_Type: NodeUtilityStringCountSubstrings,
-  NodeMiscellaneousHelp_Type: NodeMiscellaneousHelp,
-  NodeMiscellaneousAttributions_Type: NodeMiscellaneousAttributions,
-  NodeMiscellaneousOtherLinks_Type: NodeMiscellaneousOtherLinks,
-  NodeMiscellaneousLogo_Type: NodeMiscellaneousLogo,
-  Node_Type: Node,
-};
 
 export const initialNodes = [
   {
@@ -88,349 +47,45 @@ export const initialNodes = [
       value: '',
     },
     position: { x: 385, y: 325 },
-  },
-  {
-    id: '-5',
-    type: 'Node_Type',
-    dragHandle: ".node--category",
-    data: { 
-      maxInputs: 1,
-      value: '',
-    },
-    position: { x: 800, y: 325 },
   }
 ];
 
 const initialEdges = [
+  // Nothing here yet.
 ];
 
 let id = 0
 
 export default function Canvas() {
+  // ReactFlow States
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState(initialEdges);
-
-  const onNodesChange = useCallback((changes) => setNodes((nds) => applyNodeChanges(changes, nds)), [setNodes]);
-  const onEdgesChange = useCallback((changes) => setEdges((eds) => applyEdgeChanges(changes, eds)), [setEdges]);
-  const onConnect = useCallback((connection) => setEdges((eds) => addEdge(connection, eds)), [setEdges]);
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
 
-  let MENU_ID = "CONTEXTMENU_CANVAS"
+  // ReactFlow Handlers
+  const onNodesChange = useCallback((changes) => setNodes((nds) => applyNodeChanges(changes, nds)), [setNodes]);
+  const onEdgesChange = useCallback((changes) => setEdges((eds) => applyEdgeChanges(changes, eds)), [setEdges]);
+  const onConnect = useCallback((connection) => setEdges((eds) => addEdge(connection, eds)), [setEdges]);
 
+  // Node ID Tracker
   const getId = () => {return `${++id}`}
 
-  const onDrop = useCallback(
-    (event) => {
-      event.preventDefault();
-
-      const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
-      const type = event.dataTransfer.getData('application/reactflow');
-
-      // check if the dropped element is valid
-      if (typeof type === 'undefined' || !type) {
-        return;
-      }
-
-      const position = reactFlowInstance.project({
-        x: event.clientX - reactFlowBounds.left,
-        y: event.clientY - reactFlowBounds.top,
-      });
-
-      let newNode;
-      switch (type) {
-        case "NodeInputString_Type":
-          newNode = {
-            id: getId(),
-            type,
-            position,
-            dragHandle: ".node--input--string--category",
-            data: { 
-              maxInputs: 0,
-              value: "" 
-            },
-          };
-          break;
-        case "NodeStringChangeCase_Type":
-          newNode = {
-            id: getId(),
-            type,
-            position,
-            dragHandle: ".node--input--changecase--category",
-            data: { 
-              maxInputs: 1,
-              value: "" 
-            },
-          };
-          break;
-        case "NodeStringCombine_Type":
-          newNode = {
-            id: getId(),
-            type,
-            position,
-            dragHandle: ".node--input--combine--category",
-            data: { 
-              maxInputs: 2,
-              valueA: '',
-              valueB: '',
-            },
-          };
-          break;
-        case "NodeStringReverse_Type":
-          newNode = {
-            id: getId(),
-            type,
-            position,
-            dragHandle: ".node--input--reverse--category",
-            data: { 
-              maxInputs: 1,
-              value: '',
-            },
-          };
-          break;
-        case "NodeCryptographyCipherROT13_Type":
-          newNode = {
-            id: getId(),
-            type,
-            position,
-            dragHandle: ".node--cryptography--cipher--rot13--category",
-            data: { 
-              maxInputs: 1,
-              value: "" 
-            },
-          };
-          break;
-        case "NodeCryptographyHashSHA256_Type":
-          newNode = {
-            id: getId(),
-            type,
-            position,
-            dragHandle: ".node--cryptography--hash--sha256--category",
-            data: { 
-              maxInputs: 1,
-              value: "" 
-            },
-          };
-          break;
-        case "NodeOutputDisplayString_Type":
-          newNode = {
-            id: getId(),
-            type,
-            position,
-            dragHandle: ".node--output--string--category",
-            data: { 
-              maxInputs: 1,
-              value: "" 
-            },
-          };
-          break;
-        case "NodeCryptographyEncodingHexadecimal_Type":
-          newNode = {
-            id: getId(),
-            type,
-            position,
-            dragHandle: ".node--cryptography--encoding--hexadecimal--category",
-            data: { 
-              maxInputs: 1,
-              value: "" 
-            },
-          };
-          break;
-        case "NodeCryptographyEncodingAtbash_Type":
-          newNode = {
-            id: getId(),
-            type,
-            position,
-            dragHandle: ".node--cryptography--encoding--atbash--category",
-            data: { 
-              maxInputs: 1,
-              value: "" 
-            },
-          };
-          break;
-        default:
-          newNode = {
-            id: getId(),
-            type,
-            position,
-            data: { 
-              maxInputs: 0,
-              value: "ERROR" 
-            },
-          };
-          break;
-      }
-
-      setNodes((nds) => nds.concat(newNode));
-    },
-    [reactFlowInstance]
-  );
-
-  const onDragOver = useCallback((event) => {
-    event.preventDefault();
-    event.dataTransfer.dropEffect = 'move';
-  }, []);
-
-
   function handleItemClick({ event, props, data, triggerEvent }){
-    let type = data
-
     const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
     const position = reactFlowInstance.project({
       x: clickLocationX - reactFlowBounds.left,
       y: clickLocationY - reactFlowBounds.top,
     });
 
-    let newNode;
-    switch (type) {
-      case "NodeInputString_Type":
-        newNode = {
-          id: getId(),
-          type,
-          position,
-          dragHandle: ".node--input--string--category",
-          data: { 
-            maxInputs: 0,
-            value: "" 
-          },
-        };
-        break;
-      case "NodeStringChangeCase_Type":
-        newNode = {
-          id: getId(),
-          type,
-          position,
-          dragHandle: ".node--input--changecase--category",
-          data: { 
-            maxInputs: 1,
-            value: "" 
-          },
-        };
-        break;
-      case "NodeStringCombine_Type":
-        newNode = {
-          id: getId(),
-          type,
-          position,
-          dragHandle: ".node--input--combine--category",
-          data: { 
-            maxInputs: 2,
-            valueA: '',
-            valueB: '',
-          },
-        };
-        break;
-      case "NodeStringReverse_Type":
-        newNode = {
-          id: getId(),
-          type,
-          position,
-          dragHandle: ".node--input--reverse--category",
-          data: { 
-            maxInputs: 1,
-            value: '',
-          },
-        };
-        break;
-      case "NodeCryptographyCipherROT13_Type":
-        newNode = {
-          id: getId(),
-          type,
-          position,
-          dragHandle: ".node--cryptography--cipher--rot13--category",
-          data: { 
-            maxInputs: 1,
-            value: "" 
-          },
-        };
-        break;
-      case "NodeCryptographyHashSHA256_Type":
-        newNode = {
-          id: getId(),
-          type,
-          position,
-          dragHandle: ".node--cryptography--hash--sha256--category",
-          data: { 
-            maxInputs: 1,
-            value: "" 
-          },
-        };
-        break;
-      case "NodeOutputDisplayString_Type":
-        newNode = {
-          id: getId(),
-          type,
-          position,
-          dragHandle: ".node--output--string--category",
-          data: { 
-            maxInputs: 1,
-            value: "" 
-          },
-        };
-        break;
-      case "NodeCryptographyEncodingHexadecimal_Type":
-        newNode = {
-          id: getId(),
-          type,
-          position,
-          dragHandle: ".node--cryptography--encoding--hexadecimal--category",
-          data: { 
-            maxInputs: 1,
-            value: "" 
-          },
-        };
-        break;
-      case "NodeCryptographyEncodingAtbash_Type":
-        newNode = {
-          id: getId(),
-          type,
-          position,
-          dragHandle: ".node--cryptography--encoding--atbash--category",
-          data: { 
-            maxInputs: 1,
-            value: "" 
-          },
-        };
-        break;
-      case "NodeUtilityStringCountSubstrings_Type":
-        newNode = {
-          id: getId(),
-          type,
-          position,
-          dragHandle: ".node--utility--string--countsubstrings--category",
-          data: { 
-            maxInputs: 1,
-            value: "" 
-          },
-        };
-        break;
-      case "NodeMiscellaneousHelp_Type":
-        newNode = {
-          id: getId(),
-          type,
-          position,
-          dragHandle: ".node--miscellaneous--help--category",
-          data: { 
-            maxInputs: 0,
-            value: "" 
-          },
-        };
-        break;  
-      default:
-        newNode = {
-          id: getId(),
-          type,
-          position,
-          data: { 
-            maxInputs: 0,
-            value: "ERROR" 
-          },
-        };
-        break;
-    }
+    let type = data
+
+    let newNode = GetNodeByType(type, getId(), position)
+    
     setNodes((nds) => nds.concat(newNode));
   }
 
+  // Context Menu
   const { show } = useContextMenu();
 
   const [clickLocationX, setClickLocationX] = useState(0)
@@ -481,6 +136,7 @@ export default function Canvas() {
     deleteMultiNodeByID(selectedMultiNodeID)
   }
 
+  // Return Component
   return (
     <ReactFlowProvider>
       <Menu id={"CONTEXTMENU_CANVAS"} theme={theme.dark} animation={{enter: animation.scale, exit: false}}>
@@ -526,6 +182,7 @@ export default function Canvas() {
       <Menu id={"CONTEXTMENU_SELECTION"} theme={theme.dark} animation={{enter: animation.scale, exit: false}}>
         <Item data="ITEM_DELETE" onClick={handleItemDeleteSelection}>Delete Selection</Item>
       </Menu>
+      
       <div className='reactflow-wrapper' ref={reactFlowWrapper}>
           <ReactFlow
             nodes={nodes} 
@@ -533,13 +190,11 @@ export default function Canvas() {
             onNodesChange={onNodesChange}
             onEdgesChange={onEdgesChange}
             onConnect={onConnect}
-            onDrop={onDrop}
             onInit={setReactFlowInstance}
-            onDragOver={onDragOver}
             onNodeContextMenu={displayContextMenuNode}
             onSelectionContextMenu={displayContextMenuSelection}
             onPaneContextMenu={displayContextMenuCanvas}
-            nodeTypes={nodeTypes}
+            nodeTypes={NodeTypes}
             fitView
           > 
           <Background />
