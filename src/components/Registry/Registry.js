@@ -14,6 +14,8 @@ import NodeManipulationChangeCase from '../Nodes/Node-Manipulation-ChangeCase/No
 import NodeCryptographyCipherAtbash from '../Nodes/Node-Cryptography-Cipher-Atbash/Node.js';
 import NodeCryptographyCipherROT13 from '../Nodes/Node-Cryptography-Cipher-ROT13/Node.js';
 
+import NodeCryptographyEncodingHexadecimal from '../Nodes/Node-Cryptography-Encoding-Hexadecimal/Node.js';
+
 export const NodeTypes = { 
   NodeInputString_Type: NodeInputString,
   NodeOutputString_Type: NodeOutputString,
@@ -23,6 +25,8 @@ export const NodeTypes = {
 
   NodeCryptographyCipherAtbash_Type: NodeCryptographyCipherAtbash,
   NodeCryptographyCipherROT13_Type: NodeCryptographyCipherROT13,
+
+  NodeCryptographyEncodingHexadecimal_Type: NodeCryptographyEncodingHexadecimal,
 };
 
 export function GetNodeByType(type, nodeid, position){
@@ -89,6 +93,18 @@ export function GetNodeByType(type, nodeid, position){
           };
           break;
         case "NodeCryptographyCipherROT13_Type":
+          newNode = {
+            id: nodeid,
+            type,
+            position,
+            dragHandle: ".category_wrapper",
+            data: { 
+              maxInputs: 1,
+              value: "" 
+            },
+          };
+          break;
+        case "NodeCryptographyEncodingHexadecimal_Type":
           newNode = {
             id: nodeid,
             type,

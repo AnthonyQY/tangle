@@ -127,7 +127,7 @@ export default function Canvas() {
           </Submenu>
 
           <Submenu label="Encoding">
-            <Item data="" onClick={handleItemClick}>Hexadecimal</Item>
+            <Item data="NodeCryptographyEncodingHexadecimal_Type" onClick={handleItemClick}>Hexadecimal</Item>
             
           </Submenu>
 
