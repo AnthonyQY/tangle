@@ -132,7 +132,7 @@ export default function Canvas() {
           </Submenu>
 
           <Submenu label="Hashing">
-            <Item data="" onClick={handleItemClick}>SHA-256</Item>
+            <Item data="NodeCryptographyHashingSHA256_Type" onClick={handleItemClick}>SHA-256</Item>
           </Submenu>   
 
           <Submenu label="Logic">
