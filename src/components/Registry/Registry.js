@@ -6,14 +6,16 @@
 */
 
 import NodeInputString from '../Nodes/Node-Input-String/Node.js';
-import NodeOutputString from "../Nodes/Node-Output-String/Node.js"
-import Node from "../Nodes/Templates/Node-Template-SingleInput-TripleRadio-SingleOutput/Node.js"
-import NodeManipulationReverse from "../Nodes/Node-Manipulation-Reverse/Node.js"
+import NodeOutputString from "../Nodes/Node-Output-String/Node.js";
+import Node from "../Nodes/Templates/Node-Template-SingleInput-TripleRadio-SingleOutput/Node.js";
+import NodeManipulationReverse from "../Nodes/Node-Manipulation-Reverse/Node.js";
+import NodeCryptographyCipherAtbash from '../Nodes/Node-Cryptography-Cipher-Atbash/Node.js';
 
 export const NodeTypes = { 
   NodeInputString_Type: NodeInputString,
   NodeOutputString_Type: NodeOutputString,
   NodeManipulationReverse_Type: NodeManipulationReverse,
+  NodeCryptographyCipherAtbash_Type: NodeCryptographyCipherAtbash,
   Node_Type: Node,
 };
 
@@ -45,6 +47,18 @@ export function GetNodeByType(type, nodeid, position){
           };
           break;
         case "NodeManipulationReverse_Type":
+          newNode = {
+            id: nodeid,
+            type,
+            position,
+            dragHandle: ".category_wrapper",
+            data: { 
+              maxInputs: 1,
+              value: "" 
+            },
+          };
+          break;
+        case "NodeCryptographyCipherAtbash_Type":
           newNode = {
             id: nodeid,
             type,

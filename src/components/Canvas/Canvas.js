@@ -120,6 +120,7 @@ export default function Canvas() {
 
           <Submenu label="Cipher">
             <Item data="" onClick={handleItemClick}>ROT-13</Item>
+            <Item data="NodeCryptographyCipherAtbash_Type" onClick={handleItemClick}>Atbash</Item>
           </Submenu>
           <Submenu label="Encryption">
             
@@ -127,7 +128,7 @@ export default function Canvas() {
 
           <Submenu label="Encoding">
             <Item data="" onClick={handleItemClick}>Hexadecimal</Item>
-            <Item data="" onClick={handleItemClick}>Atbash</Item>
+            
           </Submenu>
 
           <Submenu label="Hashing">
