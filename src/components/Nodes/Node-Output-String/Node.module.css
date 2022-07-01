@@ -37,7 +37,7 @@
 .node_category {
     background-color: var(--node-outline-color);
   
-    padding: 0.1rem 2.5rem;
+    padding: 0.1rem 2rem;
 
     font-size: 0.5em;
 }

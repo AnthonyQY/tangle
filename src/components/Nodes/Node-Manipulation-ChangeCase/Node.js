@@ -3,12 +3,14 @@ import { Handle, Position, useKeyPress, useEdges, useNodes, useReactFlow, getOut
 
 import styles from "./Node.module.css"
 
-export default function NodeManipulationReverse({ data, id }) {
+export default function NodeManipulationChangeCase({ data, id }) {
   // Data Processing
   const processValue = ((stringData) => {
     switch(componentRadioValue) {
       case "A":
-        return [...stringData].reverse().join("");
+        return stringData.toUpperCase();
+      case "B":
+        return stringData.toLowerCase();
       default:
         return stringData;
     }
@@ -141,11 +143,15 @@ export default function NodeManipulationReverse({ data, id }) {
         isConnectable={hasInput === false}
         style={inputHandleStyle}
       />
-      <label className={styles.node_label}>Reverse String</label>
+      <label className={styles.node_label}>Change Case</label>
       <form className={styles.node_form}>
         <div>
-          <input id="optionA" className={styles.node_form_radio} name="case-type" type="radio" value="A" onChange={handleRadioChange} defaultChecked/>
-          <label className={styles.node_radio_label} htmlFor="optionA">Reverse</label>
+          <input id="optionA" className={styles.node_form_radio} name="case-type" type="radio" value="A" onChange={handleRadioChange} defaultChecked />
+          <label className={styles.node_radio_label} htmlFor="optionA">Uppercase</label>
+        </div>
+        <div>
+          <input id="optionB" className={styles.node_form_radio} name="case-type" type="radio" value="B" onChange={handleRadioChange} />
+          <label className={styles.node_radio_label} htmlFor="optionB">Lowercase</label>
         </div>
         <div>
           <input id="nop" className={styles.node_form_radio} name="case-type" type="radio" value="N" onChange={handleRadioChange} />

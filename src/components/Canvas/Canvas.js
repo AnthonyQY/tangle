@@ -111,7 +111,7 @@ export default function Canvas() {
         </Submenu>
 
         <Submenu label="Manipulation">
-          <Item data="" onClick={handleItemClick}>Change Case</Item>
+          <Item data="NodeManipulationChangeCase_Type" onClick={handleItemClick}>Change Case</Item>
           <Item data="" onClick={handleItemClick}>Combine</Item>
           <Item data="NodeManipulationReverse_Type" onClick={handleItemClick}>Reverse</Item>
         </Submenu>
