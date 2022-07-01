@@ -3,19 +3,12 @@ import { Handle, Position, useKeyPress, useEdges, useNodes, useReactFlow, getOut
 
 import styles from "./Node.module.css"
 
-export default function NodeCryptographyCipherAtbash({ data, id }) {
+export default function NodeCryptographyCipherROT13({ data, id }) {
   // Data Processing
   const processValue = ((stringData) => {
     switch(componentRadioValue) {
       case "A":
-        var arr = [];
-        for (var i=0;i<stringData.length; i++){
-          const ascii = stringData.charCodeAt(i);
-          const cond1 = (ascii>64 && ascii<91)
-          const cond2 = (ascii>96 && ascii<123)
-          arr[i] = String.fromCharCode((cond1 ? 90-ascii+65 : (cond2 ? 122-ascii+97 : ascii)));
-        }
-        return arr.join("");
+        return stringData.replace(/[a-z]/gi, letter => String.fromCharCode(letter.charCodeAt(0) + (letter.toLowerCase() <= 'm' ? 13 : -13)));
       default:
         return stringData;
     }
@@ -148,7 +141,7 @@ export default function NodeCryptographyCipherAtbash({ data, id }) {
         isConnectable={hasInput === false}
         style={inputHandleStyle}
       />
-      <label className={styles.node_label}>Atbash</label>
+      <label className={styles.node_label}>ROT-13</label>
       <form className={styles.node_form}>
         <div>
           <input id="optionA" className={styles.node_form_radio} name="case-type" type="radio" value="A" onChange={handleRadioChange} defaultChecked/>
