@@ -14,9 +14,15 @@ import NodeManipulationChangeCase from '../Nodes/Node-Manipulation-ChangeCase/No
 import NodeCryptographyCipherAtbash from '../Nodes/Node-Cryptography-Cipher-Atbash/Node.js';
 import NodeCryptographyCipherROT13 from '../Nodes/Node-Cryptography-Cipher-ROT13/Node.js';
 
+import NodeCryptographyEncodingBase64 from "../Nodes/Node-Cryptography-Encoding-Base64/Node.js"
 import NodeCryptographyEncodingHexadecimal from '../Nodes/Node-Cryptography-Encoding-Hexadecimal/Node.js';
 
+import NodeCryptographyHashingMD5 from '../Nodes/Node-Cryptography-Hashing-MD5/Node.js';
+import NodeCryptographyHashingRIPEMD160 from '../Nodes/Node-Cryptography-Hashing-RIPEMD160/Node.js';
+import NodeCryptographyHashingSHA1 from '../Nodes/Node-Cryptography-Hashing-SHA1/Node.js';
 import NodeCryptographyHashingSHA256 from '../Nodes/Node-Cryptography-Hashing-SHA256/Node.js';
+import NodeCryptographyHashingSHA512 from '../Nodes/Node-Cryptography-Hashing-SHA512/Node.js';
+
 
 export const NodeTypes = { 
   NodeInputString_Type: NodeInputString,
@@ -28,9 +34,14 @@ export const NodeTypes = {
   NodeCryptographyCipherAtbash_Type: NodeCryptographyCipherAtbash,
   NodeCryptographyCipherROT13_Type: NodeCryptographyCipherROT13,
 
+  NodeCryptographyEncodingBase64_Type: NodeCryptographyEncodingBase64,
   NodeCryptographyEncodingHexadecimal_Type: NodeCryptographyEncodingHexadecimal,
 
+  NodeCryptographyHashingMD5_Type: NodeCryptographyHashingMD5,
+  NodeCryptographyHashingRIPEMD160_Type: NodeCryptographyHashingRIPEMD160,
+  NodeCryptographyHashingSHA1_Type: NodeCryptographyHashingSHA1,
   NodeCryptographyHashingSHA256_Type: NodeCryptographyHashingSHA256,
+  NodeCryptographyHashingSHA512_Type: NodeCryptographyHashingSHA512,
 };
 
 export function GetNodeByType(type, nodeid, position){
@@ -108,6 +119,18 @@ export function GetNodeByType(type, nodeid, position){
             },
           };
           break;
+        case "NodeCryptographyEncodingBase64_Type":
+          newNode = {
+            id: nodeid,
+            type,
+            position,
+            dragHandle: ".category_wrapper",
+            data: { 
+              maxInputs: 1,
+              value: "" 
+            },
+          };
+          break; 
         case "NodeCryptographyEncodingHexadecimal_Type":
           newNode = {
             id: nodeid,
@@ -120,7 +143,55 @@ export function GetNodeByType(type, nodeid, position){
             },
           };
           break;
+        case "NodeCryptographyHashingMD5_Type":
+          newNode = {
+            id: nodeid,
+            type,
+            position,
+            dragHandle: ".category_wrapper",
+            data: { 
+              maxInputs: 1,
+              value: "" 
+            },
+          };
+          break;
+        case "NodeCryptographyHashingRIPEMD160_Type":
+          newNode = {
+            id: nodeid,
+            type,
+            position,
+            dragHandle: ".category_wrapper",
+            data: { 
+              maxInputs: 1,
+              value: "" 
+            },
+          };
+          break;
+        case "NodeCryptographyHashingSHA1_Type":
+          newNode = {
+            id: nodeid,
+            type,
+            position,
+            dragHandle: ".category_wrapper",
+            data: { 
+              maxInputs: 1,
+              value: "" 
+            },
+          };
+          break;
         case "NodeCryptographyHashingSHA256_Type":
+          newNode = {
+            id: nodeid,
+            type,
+            position,
+            dragHandle: ".category_wrapper",
+            data: { 
+              maxInputs: 1,
+              value: "" 
+            },
+          };
+          break;
+        case "NodeCryptographyHashingSHA512_Type":
           newNode = {
             id: nodeid,
             type,

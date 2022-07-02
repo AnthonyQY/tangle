@@ -3,13 +3,13 @@ import { Handle, Position, useKeyPress, useEdges, useNodes, useReactFlow, getOut
 
 import styles from "./Node.module.css"
 
-export default function NodeCryptographyHashingSHA256({ data, id }) {
+export default function NodeCryptographyHashingRIPEMD160({ data, id }) {
   // Data Processing
   const processValue = ((stringData) => {
     switch(componentRadioValue) {
       case "A":
         var CryptoJS = require("crypto-js");
-        return CryptoJS.SHA256(stringData).toString()
+        return CryptoJS.RIPEMD160(stringData).toString()
       default:
         return stringData;
     }
@@ -142,7 +142,7 @@ export default function NodeCryptographyHashingSHA256({ data, id }) {
         isConnectable={hasInput === false}
         style={inputHandleStyle}
       />
-      <label className={styles.node_label}>SHA-256</label>
+      <label className={styles.node_label}>RIPEMD-160</label>
       <form className={styles.node_form}>
         <div>
           <input id="optionA" className={styles.node_form_radio} name="case-type" type="radio" value="A" onChange={handleRadioChange} defaultChecked />

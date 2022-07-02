@@ -128,11 +128,15 @@ export default function Canvas() {
 
           <Submenu label="Encoding">
             <Item data="NodeCryptographyEncodingHexadecimal_Type" onClick={handleItemClick}>Hexadecimal</Item>
-            
+            <Item data="NodeCryptographyEncodingBase64_Type" onClick={handleItemClick}>Base64</Item>
           </Submenu>
 
           <Submenu label="Hashing">
+            <Item data="NodeCryptographyHashingMD5_Type" onClick={handleItemClick}>MD-5</Item>
+            <Item data="NodeCryptographyHashingRIPEMD160_Type" onClick={handleItemClick}>RIPEMD-160</Item>
+            <Item data="NodeCryptographyHashingSHA1_Type" onClick={handleItemClick}>SHA-1</Item>
             <Item data="NodeCryptographyHashingSHA256_Type" onClick={handleItemClick}>SHA-256</Item>
+            <Item data="NodeCryptographyHashingSHA512_Type" onClick={handleItemClick}>SHA-512</Item>
           </Submenu>   
 
           <Submenu label="Logic">
