@@ -136,7 +136,7 @@ export default function Canvas() {
           </Submenu>   
 
           <Submenu label="Logic">
-            <Item data="" onClick={handleItemClick}>XOR</Item>
+            <Item data="NodeCryptographyCipherXOR_Type" onClick={handleItemClick}>XOR</Item>
           </Submenu>   
 
         </Submenu>

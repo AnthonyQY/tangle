@@ -16,6 +16,8 @@ import NodeCryptographyCipherROT13 from '../Nodes/Node-Cryptography-Cipher-ROT13
 
 import NodeCryptographyEncodingHexadecimal from '../Nodes/Node-Cryptography-Encoding-Hexadecimal/Node.js';
 
+import NodeCryptographyCipherXOR from '../Nodes/Node-Cryptography-Logic-XOR/Node.js';
+
 import NodeCryptographyHashingSHA256 from '../Nodes/Node-Cryptography-Hashing-SHA256/Node.js';
 
 export const NodeTypes = { 
@@ -29,6 +31,8 @@ export const NodeTypes = {
   NodeCryptographyCipherROT13_Type: NodeCryptographyCipherROT13,
 
   NodeCryptographyEncodingHexadecimal_Type: NodeCryptographyEncodingHexadecimal,
+
+  NodeCryptographyCipherXOR_Type: NodeCryptographyCipherXOR,
 
   NodeCryptographyHashingSHA256_Type: NodeCryptographyHashingSHA256,
 };
@@ -109,6 +113,18 @@ export function GetNodeByType(type, nodeid, position){
           };
           break;
         case "NodeCryptographyEncodingHexadecimal_Type":
+          newNode = {
+            id: nodeid,
+            type,
+            position,
+            dragHandle: ".category_wrapper",
+            data: { 
+              maxInputs: 1,
+              value: "" 
+            },
+          };
+          break;
+        case "NodeCryptographyCipherXOR_Type":
           newNode = {
             id: nodeid,
             type,
