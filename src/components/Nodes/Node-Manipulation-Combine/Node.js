@@ -3,7 +3,7 @@ import { Handle, Position, useKeyPress, useEdges, useNodes, useReactFlow, getOut
 
 import styles from "./Node.module.css"
 
-export default function Node({ data, id }) {
+export default function NodeManipulationCombine({ data, id }) {
   // Data Processing
   const processValue = ((a, b) => {
     switch(componentRadioValue) {
@@ -157,15 +157,15 @@ export default function Node({ data, id }) {
         isConnectable={hasBothInputs === false}
         style={inputHandleStyleB}
       />
-      <label className={styles.node_label}>Template</label>
+      <label className={styles.node_label}>Combine</label>
       <form className={styles.node_form}>
         <div>
           <input id="optionA" className={styles.node_form_radio} name="case-type" type="radio" value="A" onChange={handleRadioChange} defaultChecked/>
-          <label className={styles.node_radio_label} htmlFor="optionA">Option A</label>
+          <label className={styles.node_radio_label} htmlFor="optionA">A + B</label>
         </div>
         <div>
           <input id="optionB" className={styles.node_form_radio} name="case-type" type="radio" value="B" onChange={handleRadioChange}/>
-          <label className={styles.node_radio_label} htmlFor="optionB">Option B</label>
+          <label className={styles.node_radio_label} htmlFor="optionB">B + A</label>
         </div>
         <div>
           <input id="nop" className={styles.node_form_radio} name="case-type" type="radio" value="N" onChange={handleRadioChange} />
@@ -178,7 +178,7 @@ export default function Node({ data, id }) {
       </div>
       <div className="category_wrapper">
         <div className={styles.node_category}>
-          <label className={styles.node_category_label}>TEMPLATE</label>
+          <label className={styles.node_category_label}>MANIPULATION</label>
         </div>
       </div>
       <Handle 

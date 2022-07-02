@@ -8,16 +8,6 @@ import "react-contexify/dist/ReactContexify.css";
 import "./Canvas.css"
 
 export const initialNodes = [
-  {
-    id: "-1",
-    type: "Node_Type",
-    position: {x: 750, y: 500},
-    dragHandle: ".category_wrapper",
-    data: { 
-      maxInputs: 2,
-      value: "" 
-    },
-  }
 ];
 
 const initialEdges = [
@@ -121,7 +111,7 @@ export default function Canvas() {
 
         <Submenu label="Manipulation">
           <Item data="NodeManipulationChangeCase_Type" onClick={handleItemClick}>Change Case</Item>
-          <Item data="" onClick={handleItemClick}>Combine</Item>
+          <Item data="NodeManipulationCombine_Type" onClick={handleItemClick}>Combine</Item>
           <Item data="NodeManipulationReverse_Type" onClick={handleItemClick}>Reverse</Item>
         </Submenu>
 
@@ -155,7 +145,7 @@ export default function Canvas() {
         </Submenu>
 
         <Submenu label="Utility">
-          <Item data="" onClick={handleItemClick}>Count Substrings</Item>
+          <Item data="NodeUtilityCountSubstrings_Type" onClick={handleItemClick}>Count Substrings</Item>
         </Submenu>
 
         <Submenu label="Miscellaneous">

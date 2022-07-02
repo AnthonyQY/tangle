@@ -9,6 +9,7 @@ import NodeInputString from '../Nodes/Node-Input-String/Node.js';
 import NodeOutputString from "../Nodes/Node-Output-String/Node.js";
 
 import NodeManipulationReverse from "../Nodes/Node-Manipulation-Reverse/Node.js";
+import NodeManipulationCombine from "../Nodes/Node-Manipulation-Combine/Node.js"
 import NodeManipulationChangeCase from '../Nodes/Node-Manipulation-ChangeCase/Node.js';
 
 import NodeCryptographyCipherAtbash from '../Nodes/Node-Cryptography-Cipher-Atbash/Node.js';
@@ -23,6 +24,8 @@ import NodeCryptographyHashingSHA1 from '../Nodes/Node-Cryptography-Hashing-SHA1
 import NodeCryptographyHashingSHA256 from '../Nodes/Node-Cryptography-Hashing-SHA256/Node.js';
 import NodeCryptographyHashingSHA512 from '../Nodes/Node-Cryptography-Hashing-SHA512/Node.js';
 
+import NodeUtilityCountSubstrings from '../Nodes/Node-Utility-CountSubstrings/Node.js'
+
 import Node from '../Nodes/Templates/Node-Template-DoubleInput-TripleRadio-SingleOutput/Node.js'
 
 export const NodeTypes = { 
@@ -30,6 +33,7 @@ export const NodeTypes = {
   NodeOutputString_Type: NodeOutputString,
 
   NodeManipulationReverse_Type: NodeManipulationReverse,
+  NodeManipulationCombine_Type: NodeManipulationCombine,
   NodeManipulationChangeCase_Type: NodeManipulationChangeCase,
 
   NodeCryptographyCipherAtbash_Type: NodeCryptographyCipherAtbash,
@@ -43,6 +47,8 @@ export const NodeTypes = {
   NodeCryptographyHashingSHA1_Type: NodeCryptographyHashingSHA1,
   NodeCryptographyHashingSHA256_Type: NodeCryptographyHashingSHA256,
   NodeCryptographyHashingSHA512_Type: NodeCryptographyHashingSHA512,
+
+  NodeUtilityCountSubstrings_Type: NodeUtilityCountSubstrings,
 
   Node_Type: Node,
 };
@@ -82,6 +88,18 @@ export function GetNodeByType(type, nodeid, position){
             dragHandle: ".category_wrapper",
             data: { 
               maxInputs: 1,
+              value: "" 
+            },
+          };
+          break;
+        case "NodeManipulationCombine_Type":
+          newNode = {
+            id: nodeid,
+            type,
+            position,
+            dragHandle: ".category_wrapper",
+            data: { 
+              maxInputs: 2,
               value: "" 
             },
           };
@@ -203,6 +221,20 @@ export function GetNodeByType(type, nodeid, position){
             data: { 
               maxInputs: 1,
               value: "" 
+            },
+          };
+          break;
+        case "NodeUtilityCountSubstrings_Type":
+          newNode = {
+            id: nodeid,
+            type,
+            position,
+            dragHandle: ".category_wrapper",
+            data: { 
+              maxInputs: 2,
+              value: "",
+              valueA: "", 
+              valueB: ""
             },
           };
           break;
