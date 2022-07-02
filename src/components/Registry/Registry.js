@@ -23,6 +23,7 @@ import NodeCryptographyHashingSHA1 from '../Nodes/Node-Cryptography-Hashing-SHA1
 import NodeCryptographyHashingSHA256 from '../Nodes/Node-Cryptography-Hashing-SHA256/Node.js';
 import NodeCryptographyHashingSHA512 from '../Nodes/Node-Cryptography-Hashing-SHA512/Node.js';
 
+import Node from '../Nodes/Templates/Node-Template-DoubleInput-TripleRadio-SingleOutput/Node.js'
 
 export const NodeTypes = { 
   NodeInputString_Type: NodeInputString,
@@ -42,6 +43,8 @@ export const NodeTypes = {
   NodeCryptographyHashingSHA1_Type: NodeCryptographyHashingSHA1,
   NodeCryptographyHashingSHA256_Type: NodeCryptographyHashingSHA256,
   NodeCryptographyHashingSHA512_Type: NodeCryptographyHashingSHA512,
+
+  Node_Type: Node,
 };
 
 export function GetNodeByType(type, nodeid, position){
@@ -200,6 +203,20 @@ export function GetNodeByType(type, nodeid, position){
             data: { 
               maxInputs: 1,
               value: "" 
+            },
+          };
+          break;
+        case "Node_Type":
+          newNode = {
+            id: nodeid,
+            type,
+            position,
+            dragHandle: ".category_wrapper",
+            data: { 
+              maxInputs: 2,
+              value: "",
+              valueA: "", 
+              valueB: ""
             },
           };
           break;

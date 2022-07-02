@@ -8,7 +8,16 @@ import "react-contexify/dist/ReactContexify.css";
 import "./Canvas.css"
 
 export const initialNodes = [
-
+  {
+    id: "-1",
+    type: "Node_Type",
+    position: {x: 750, y: 500},
+    dragHandle: ".category_wrapper",
+    data: { 
+      maxInputs: 2,
+      value: "" 
+    },
+  }
 ];
 
 const initialEdges = [
