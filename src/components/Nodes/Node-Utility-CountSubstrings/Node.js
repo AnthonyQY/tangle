@@ -161,7 +161,7 @@ export default function NodeUtilityCountSubstrings({ data, id }) {
       <form className={styles.node_form}>
         <div>
           <input id="optionA" className={styles.node_form_radio} name="case-type" type="radio" value="A" onChange={handleRadioChange} defaultChecked/>
-          <label className={styles.node_radio_label} htmlFor="optionA">B is Substrings</label>
+          <label className={styles.node_radio_label} htmlFor="optionA">B is Substring</label>
         </div>
         <div>
           <input id="optionB" className={styles.node_form_radio} name="case-type" type="radio" value="B" onChange={handleRadioChange}/>
