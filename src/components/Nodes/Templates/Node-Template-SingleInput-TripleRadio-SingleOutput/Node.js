@@ -154,8 +154,6 @@ export default function Node({ data, id }) {
           <h5>[Inputs]</h5>
           <p>A (Type: String)</p>
           <i>Input A description.</i>
-          <p>B (Type: String)</p>
-          <i>Input B description.</i>
           <h5>[Outputs]</h5>
           <p>A (Type: String)</p>
           <i>Output A description.</i>
