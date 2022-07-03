@@ -18,6 +18,13 @@ import NodeCryptographyCipherROT13 from '../Nodes/Node-Cryptography-Cipher-ROT13
 import NodeCryptographyEncodingBase64 from "../Nodes/Node-Cryptography-Encoding-Base64/Node.js"
 import NodeCryptographyEncodingHexadecimal from '../Nodes/Node-Cryptography-Encoding-Hexadecimal/Node.js';
 
+import NodeCryptographyEncryptionAES256 from '../Nodes/Node-Cryptography-Encryption-AES256/Node.js'
+import NodeCryptographyEncryptionDES from '../Nodes/Node-Cryptography-Encryption-DES/Node.js';
+import NodeCryptographyEncryptionRabbit from '../Nodes/Node-Cryptography-Encryption-Rabbit/Node.js'
+import NodecryptographyEncryptionRC4 from '../Nodes/Node-Cryptography-Encryption-RC4/Node.js'
+import NodeCryptographyEncryptionRC4Drop from '../Nodes/Node-Cryptography-Encryption-RC4Drop/Node.js';
+import NodeCryptographyEncryptionTripleDES from '../Nodes/Node-Cryptography-Encryption-TripleDES/Node.js';
+
 import NodeCryptographyHashingMD5 from '../Nodes/Node-Cryptography-Hashing-MD5/Node.js';
 import NodeCryptographyHashingRIPEMD160 from '../Nodes/Node-Cryptography-Hashing-RIPEMD160/Node.js';
 import NodeCryptographyHashingSHA1 from '../Nodes/Node-Cryptography-Hashing-SHA1/Node.js';
@@ -42,6 +49,13 @@ export const NodeTypes = {
   NodeCryptographyEncodingBase64_Type: NodeCryptographyEncodingBase64,
   NodeCryptographyEncodingHexadecimal_Type: NodeCryptographyEncodingHexadecimal,
 
+  NodeCryptographyEncryptionAES256_Type: NodeCryptographyEncryptionAES256,
+  NodeCryptographyEncryptionDES_Type: NodeCryptographyEncryptionDES,
+  NodeCryptographyEncryptionRabbit_Type: NodeCryptographyEncryptionRabbit,
+  NodecryptographyEncryptionRC4_Type: NodecryptographyEncryptionRC4,
+  NodeCryptographyEncryptionRC4Drop_Type: NodeCryptographyEncryptionRC4Drop,
+  NodeCryptographyEncryptionTripleDES_Type: NodeCryptographyEncryptionTripleDES,
+
   NodeCryptographyHashingMD5_Type: NodeCryptographyHashingMD5,
   NodeCryptographyHashingRIPEMD160_Type: NodeCryptographyHashingRIPEMD160,
   NodeCryptographyHashingSHA1_Type: NodeCryptographyHashingSHA1,
@@ -56,6 +70,7 @@ export const NodeTypes = {
 export function GetNodeByType(type, nodeid, position){
     let newNode;
     switch (type) {
+        // Input Nodes
         case "NodeInputString_Type":
           newNode = {
             id: nodeid,
@@ -68,6 +83,8 @@ export function GetNodeByType(type, nodeid, position){
             },
           };
           break;
+        
+        // Output Nodes
         case "NodeOutputString_Type":
           newNode = {
             id: nodeid,
@@ -80,6 +97,8 @@ export function GetNodeByType(type, nodeid, position){
             },
           };
           break;
+
+        // Manipulation Nodes
         case "NodeManipulationReverse_Type":
           newNode = {
             id: nodeid,
@@ -116,6 +135,8 @@ export function GetNodeByType(type, nodeid, position){
             },
           };
           break;
+
+        // Cipher Nodes
         case "NodeCryptographyCipherAtbash_Type":
           newNode = {
             id: nodeid,
@@ -164,6 +185,82 @@ export function GetNodeByType(type, nodeid, position){
             },
           };
           break;
+
+        // Encryption Nodes
+        case "NodeCryptographyEncryptionAES256_Type":
+          newNode = {
+            id: nodeid,
+            type,
+            position,
+            dragHandle: ".category_wrapper",
+            data: { 
+              maxInputs: 2,
+              value: "" 
+            },
+          };
+          break;
+        case "NodeCryptographyEncryptionDES_Type":
+          newNode = {
+            id: nodeid,
+            type,
+            position,
+            dragHandle: ".category_wrapper",
+            data: { 
+              maxInputs: 2,
+              value: "" 
+            },
+          };
+          break;
+        case "NodeCryptographyEncryptionRabbit_Type":
+          newNode = {
+            id: nodeid,
+            type,
+            position,
+            dragHandle: ".category_wrapper",
+            data: { 
+              maxInputs: 2,
+              value: "" 
+            },
+          };
+          break;
+        case "NodecryptographyEncryptionRC4_Type":
+          newNode = {
+            id: nodeid,
+            type,
+            position,
+            dragHandle: ".category_wrapper",
+            data: { 
+              maxInputs: 2,
+              value: "" 
+            },
+          };
+          break;
+        case "NodeCryptographyEncryptionRC4Drop_Type":
+          newNode = {
+            id: nodeid,
+            type,
+            position,
+            dragHandle: ".category_wrapper",
+            data: { 
+              maxInputs: 2,
+              value: "" 
+            },
+          };
+          break;
+        case "NodeCryptographyEncryptionTripleDES_Type":
+          newNode = {
+            id: nodeid,
+            type,
+            position,
+            dragHandle: ".category_wrapper",
+            data: { 
+              maxInputs: 2,
+              value: "" 
+            },
+          };
+          break;
+        
+        // Hashing Nodes
         case "NodeCryptographyHashingMD5_Type":
           newNode = {
             id: nodeid,
@@ -224,6 +321,8 @@ export function GetNodeByType(type, nodeid, position){
             },
           };
           break;
+        
+        // Utility Nodes
         case "NodeUtilityCountSubstrings_Type":
           newNode = {
             id: nodeid,
@@ -238,6 +337,8 @@ export function GetNodeByType(type, nodeid, position){
             },
           };
           break;
+        
+        // Test Nodes
         case "Node_Type":
           newNode = {
             id: nodeid,

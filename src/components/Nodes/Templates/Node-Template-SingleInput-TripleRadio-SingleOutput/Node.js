@@ -157,6 +157,7 @@ export default function Node({ data, id }) {
           <h5>[Outputs]</h5>
           <p>A (Type: String)</p>
           <i>Output A description.</i>
+          <h5>[Comments]</h5>
         </span>
       </div>
 

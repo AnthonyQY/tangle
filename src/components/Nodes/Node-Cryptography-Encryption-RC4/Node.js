@@ -5,14 +5,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styles from "./Node.module.css"
 
 
-export default function Node({ data, id }) {
+export default function NodeCryptographyEncryptionRC4({ data, id }) {
   // Data Processing
   const processValue = ((a, b) => {
+    var CryptoJS = require("crypto-js");
+
+    if(a === undefined || b == undefined){
+      return "None"
+    }
+
     switch(componentRadioValue) {
       case "A":
-        return [a, b].join('')
+        return CryptoJS.RC4.encrypt(a, b).toString()
       case "B":
-        return [b, a].join('')
+        return CryptoJS.RC4.decrypt(a, b).toString(CryptoJS.enc.Utf8)
       default:
         return a;
     }
@@ -159,33 +165,34 @@ export default function Node({ data, id }) {
         isConnectable={hasBothInputs === false}
         style={inputHandleStyleB}
       />
-      <label className={styles.node_label}>Template</label>
+      <label className={styles.node_label}>RC4</label>
       
       <div className={styles.tooltip}>
         <FontAwesomeIcon className = {styles.node_icon_help} icon="fa-regular fa-circle-question" size="xs"/>
         <span className={styles.tooltiptext}>
-          <h3>Template</h3>
+          <h3>RC4</h3>
           <h4>Category</h4>
           <h5>[Inputs]</h5>
           <p>A (Type: String)</p>
-          <i>Input A description.</i>
+          <i>The String to encrypt/decrypt.</i>
           <p>B (Type: String)</p>
-          <i>Input B description.</i>
+          <i>The Secret used to encrypt/decrypt. A 256-bit key will be generated automatically using this. This is NOT the actual encryption/decryption key.</i>
           <h5>[Outputs]</h5>
           <p>A (Type: String)</p>
-          <i>Output A description.</i>
+          <i>A UTF-8 encoded encrypted/decrypted string. Encrypted strings are in OpenSSL-compatible format.</i>
           <h5>[Comments]</h5>
+          <p>Uses CBC mode.</p>
         </span>
       </div>
       
       <form className={styles.node_form}>
         <div>
           <input id="optionA" className={styles.node_form_radio} name="case-type" type="radio" value="A" onChange={handleRadioChange} defaultChecked/>
-          <label className={styles.node_radio_label} htmlFor="optionA">Option A</label>
+          <label className={styles.node_radio_label} htmlFor="optionA">Encrypt</label>
         </div>
         <div>
           <input id="optionB" className={styles.node_form_radio} name="case-type" type="radio" value="B" onChange={handleRadioChange}/>
-          <label className={styles.node_radio_label} htmlFor="optionB">Option B</label>
+          <label className={styles.node_radio_label} htmlFor="optionB">Decrypt</label>
         </div>
         <div>
           <input id="nop" className={styles.node_form_radio} name="case-type" type="radio" value="N" onChange={handleRadioChange} />
@@ -198,7 +205,7 @@ export default function Node({ data, id }) {
       </div>
       <div className="category_wrapper">
         <div className={styles.node_category}>
-          <label className={styles.node_category_label}>TEMPLATE</label>
+          <label className={styles.node_category_label}>CRYPTOGRAPHY</label>
         </div>
       </div>
       <Handle 

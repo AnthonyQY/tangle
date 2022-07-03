@@ -8,16 +8,7 @@ import "react-contexify/dist/ReactContexify.css";
 import "./Canvas.css"
 
 export const initialNodes = [
-  {
-    id: "-1",
-    type: "Node_Type",
-    position: {x: 750, y: 500},
-    dragHandle: ".category_wrapper",
-    data: { 
-      maxInputs: 2,
-      value: "" 
-    },
-  }
+
 ];
 
 const initialEdges = [
@@ -132,7 +123,12 @@ export default function Canvas() {
             <Item data="NodeCryptographyCipherAtbash_Type" onClick={handleItemClick}>Atbash</Item>
           </Submenu>
           <Submenu label="Encryption">
-            
+            <Item data="NodeCryptographyEncryptionAES256_Type" onClick={handleItemClick}>AES-256</Item>
+            <Item data="NodeCryptographyEncryptionDES_Type" onClick={handleItemClick}>DES</Item>
+            <Item data="NodeCryptographyEncryptionRabbit_Type" onClick={handleItemClick}>Rabbit</Item>
+            <Item data="NodecryptographyEncryptionRC4_Type" onClick={handleItemClick}>RC4</Item>
+            <Item data="NodeCryptographyEncryptionRC4Drop_Type" onClick={handleItemClick}>RC4Drop</Item>
+            <Item data="NodeCryptographyEncryptionTripleDES_Type" onClick={handleItemClick}>Triple DES</Item>
           </Submenu>
 
           <Submenu label="Encoding">
