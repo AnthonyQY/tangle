@@ -88,32 +88,24 @@
     z-index: 20;
 
     position: absolute;
-    top: 0.45rem;
+    top: 0.4rem;
     right: 100%;
 
-    padding: 5px 0;
+    padding-top: 0.25rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
 
     width: 120px;
 
     background-color: black;
     color: #fff;
 
-    text-align: center;
+    text-align: left;
     font-size: 0.5em;
 
     border-radius: 1px;
 }
 
-.tooltip .tooltiptext::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 100%;
-    margin-top: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent transparent black;
-}
 .tooltip:hover .tooltiptext {
     visibility: visible;
 }

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Handle, Position, useKeyPress, useEdges, useNodes, useReactFlow, getOutgoers, getIncomers } from 'react-flow-renderer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Tooltip from "rc-tooltip"
 
 import styles from "./Node.module.css"
 
@@ -164,7 +163,18 @@ export default function Node({ data, id }) {
       
       <div className={styles.tooltip}>
         <FontAwesomeIcon className = {styles.node_icon_help} icon="fa-regular fa-circle-question" size="xs"/>
-        <span className={styles.tooltiptext}>Tooltip text</span>
+        <span className={styles.tooltiptext}>
+          <h3>Template</h3>
+          <h4>Category</h4>
+          <h5>[Inputs]</h5>
+          <p>A (Type: String)</p>
+          <i>Input A description.</i>
+          <p>B (Type: String)</p>
+          <i>Input B description.</i>
+          <h5>[Outputs]</h5>
+          <p>A (Type: String)</p>
+          <i>Output A description.</i>
+        </span>
       </div>
       
       <form className={styles.node_form}>
@@ -191,7 +201,7 @@ export default function Node({ data, id }) {
         </div>
       </div>
       <Handle 
-        id="output" 
+        id="a" 
         type="source" 
         position={Position.Right} 
         isConnectable={true}
