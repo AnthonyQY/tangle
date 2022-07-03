@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Handle, Position, useKeyPress, useEdges, useNodes, useReactFlow, getOutgoers, getIncomers } from 'react-flow-renderer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Tooltip from "rc-tooltip"
 
 import styles from "./Node.module.css"
+
 
 export default function Node({ data, id }) {
   // Data Processing
@@ -158,6 +161,12 @@ export default function Node({ data, id }) {
         style={inputHandleStyleB}
       />
       <label className={styles.node_label}>Template</label>
+      
+      <div className={styles.tooltip}>
+        <FontAwesomeIcon className = {styles.node_icon_help} icon="fa-regular fa-circle-question" size="xs"/>
+        <span className={styles.tooltiptext}>Tooltip text</span>
+      </div>
+      
       <form className={styles.node_form}>
         <div>
           <input id="optionA" className={styles.node_form_radio} name="case-type" type="radio" value="A" onChange={handleRadioChange} defaultChecked/>
