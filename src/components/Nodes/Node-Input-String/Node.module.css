@@ -58,3 +58,38 @@
     color: white; 
     margin: 0.5rem 1rem;
 }
+
+.node_icon_help {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-top: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+
+    position: absolute;
+    top: 0.25rem;
+    left: 100%;
+
+    padding-top: 0.25rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    width: 120px;
+
+    background-color: black;
+    color: #fff;
+
+    text-align: left;
+    font-size: 0.5em;
+
+    border-radius: 1px;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}

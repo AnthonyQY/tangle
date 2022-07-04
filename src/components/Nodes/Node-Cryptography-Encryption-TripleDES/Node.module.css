@@ -78,18 +78,17 @@
 .node_icon_help {
     position: absolute;
     top: 0;
-    left: 0;
+    right: 0;
     padding-top: 0.75rem;
-    padding-left: 0.75rem;
+    padding-right: 0.75rem;
 }
 
 .tooltip .tooltiptext {
     visibility: hidden;
-    z-index: 2147483647;
 
     position: absolute;
-    top: 0.4rem;
-    right: 100%;
+    top: 0.25rem;
+    left: 100%;
 
     padding-top: 0.25rem;
     padding-bottom: 1rem;

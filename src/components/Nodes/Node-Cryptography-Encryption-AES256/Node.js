@@ -165,18 +165,19 @@ export default function NodeCryptographyEncryptionAES256({ data, id }) {
         isConnectable={hasBothInputs === false}
         style={inputHandleStyleB}
       />
+
       <label className={styles.node_label}>AES-256</label>
       
       <div className={styles.tooltip}>
         <FontAwesomeIcon className = {styles.node_icon_help} icon="fa-regular fa-circle-question" size="xs"/>
         <span className={styles.tooltiptext}>
           <h3>AES-256</h3>
-          <h4>Category</h4>
+          <h4>Cryptography/Encryption</h4>
           <h5>[Inputs]</h5>
           <p>A (Type: String)</p>
-          <i>The String to encrypt/decrypt.</i>
+          <i>The string to encrypt/decrypt.</i>
           <p>B (Type: String)</p>
-          <i>The Secret used to encrypt/decrypt. A 256-bit key will be generated automatically using this. This is NOT the actual encryption/decryption key.</i>
+          <i>The secret used to encrypt/decrypt. A 256-bit key will be generated automatically using this. This is NOT the actual encryption/decryption key.</i>
           <h5>[Outputs]</h5>
           <p>A (Type: String)</p>
           <i>A UTF-8 encoded encrypted/decrypted string. Encrypted strings are in OpenSSL-compatible format.</i>
