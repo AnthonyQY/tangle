@@ -11,7 +11,7 @@ A simple, user-friendly node graph for exploring cryptography and ciphers.
 
 ## Demo
 
-https://lolitechnologies.github.io/tangle/
+https://tangle.lolitek.com/
 
 ## Screenshot
 ![Logo](https://i.ibb.co/PTb4dB5/demo.png)
