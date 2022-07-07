@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Handle, Position, useKeyPress, useEdges, useNodes, useReactFlow, getOutgoers, getIncomers } from 'react-flow-renderer';
 
-import "./NodeStringCombine.css"
+import "./Node.module.css"
 
 function NodeStringCombine({ data, id }) {
   // Utility
