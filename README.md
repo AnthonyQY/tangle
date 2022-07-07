@@ -3,7 +3,7 @@
 
 <div align="center">
  
- <a href="">![GitHub](https://img.shields.io/github/license/LoliTechnologies/tangle)</a>
+ <a href="">![GitHub](https://img.shields.io/github/license/anthonyqy/tangle)</a>
  
 </div>
 
