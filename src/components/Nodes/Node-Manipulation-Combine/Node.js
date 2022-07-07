@@ -4,14 +4,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styles from "./Node.module.css"
 
-export default function NodeManipulationReverse({ data, id }) {
+export default function NodeManipulationCombine({ data, id }) {
   // Data Processing
-  const processValue = ((stringData) => {
+  const processValue = ((a, b) => {
     switch(componentRadioValue) {
       case "A":
-        return [...stringData].reverse().join("");
+        return [a, b].join('')
+      case "B":
+        return [b, a].join('')
       default:
-        return stringData;
+        return a;
     }
   })
 
@@ -28,9 +30,9 @@ export default function NodeManipulationReverse({ data, id }) {
   // States
   const [componentValue, setComponentValue] = useState(data.value)
   const [componentRadioValue, setComponentRadioValue] = useState("A")
-  const [componentPreview, setComponentPreview] = useState(processValue(data.value))
+  const [componentPreview, setComponentPreview] = useState(processValue(data.valueA, data.valueB))
 
-  const [hasInput, setHasInput] = useState(false)
+  const [hasBothInputs, setHasBothInputs] = useState(false)
   const [hasOutput, setHasOutput] = useState(false)
   const [connectedOutputHandleId, setConnectedOutputHandleId] = useState()
 
@@ -44,7 +46,7 @@ export default function NodeManipulationReverse({ data, id }) {
   // Hooks
   useEffect(() => {
     localUpdate()
-  }, [enterPressed, hasInput, hasOutput, componentRadioValue])
+  }, [enterPressed, hasBothInputs, hasOutput, componentRadioValue])
 
   useEffect(() => {
     setComponentPreview(processPreview(componentValue))
@@ -70,7 +72,7 @@ export default function NodeManipulationReverse({ data, id }) {
 
   // Updaters
   const updateSelf = () => {
-    setComponentValue(processValue(data.value))
+    setComponentValue(processValue(data.valueA, data.valueB))
   }
 
   const updateConnectedNodes = (value) => {
@@ -99,11 +101,11 @@ export default function NodeManipulationReverse({ data, id }) {
   }
 
   const updateConnections = () => {
-    if(getIncomers(reactFlow.getNode(id), allNodes, allEdges).length > 0){
-      setHasInput(true)
+    if(getIncomers(reactFlow.getNode(id), allNodes, allEdges).length > 1){
+      setHasBothInputs(true)
     }
     else{
-      setHasInput(false)
+      setHasBothInputs(false)
     }
     if(getOutgoers(reactFlow.getNode(id), allNodes, allEdges).length > 0){
       setHasOutput(true)
@@ -124,9 +126,15 @@ export default function NodeManipulationReverse({ data, id }) {
   }
 
   // Styles
-  const inputHandleStyle = {
+  const inputHandleStyleA = {
     left: 1,
+    top: 50,
   }
+  const inputHandleStyleB = {
+    left: 1,
+    top: 100,
+  }
+
   const outputHandleStyle = {
     right: 0.65,
   }
@@ -139,29 +147,43 @@ export default function NodeManipulationReverse({ data, id }) {
         type="target" 
         position={Position.Left} 
         className={"input-string"}
-        isConnectable={hasInput === false}
-        style={inputHandleStyle}
+        isConnectable={hasBothInputs === false}
+        style={inputHandleStyleA}
       />
-      <label className={styles.node_label}>Reverse String</label>
-
+      <Handle 
+        id="b"
+        type="target" 
+        position={Position.Left} 
+        className={"input-string"}
+        isConnectable={hasBothInputs === false}
+        style={inputHandleStyleB}
+      />
+      <label className={styles.node_label}>Combine</label>
+      
       <div className={styles.tooltip}>
         <FontAwesomeIcon className = {styles.node_icon_help} icon="fa-regular fa-circle-question" size="xs"/>
         <span className={styles.tooltiptext}>
-          <h3>Reverse</h3>
-          <h4>Manipulation</h4>
+          <h3>Combine</h3>
+          <h4>Cryptography/Encryption</h4>
           <h5>[Inputs]</h5>
           <p>A (Type: String)</p>
-          <i>The string to reverse.</i>
+          <i>A string to concatenate.</i>
+          <p>B (Type: String)</p>
+          <i>A string to concatenate.</i>
           <h5>[Outputs]</h5>
           <p>A (Type: String)</p>
-          <i>The reversed string.</i>
+          <i>A string concatenated with the selected order.</i>
         </span>
       </div>
 
       <form className={styles.node_form}>
         <div>
           <input id="optionA" className={styles.node_form_radio} name="case-type" type="radio" value="A" onChange={handleRadioChange} defaultChecked/>
-          <label className={styles.node_radio_label} htmlFor="optionA">Reverse</label>
+          <label className={styles.node_radio_label} htmlFor="optionA">A + B</label>
+        </div>
+        <div>
+          <input id="optionB" className={styles.node_form_radio} name="case-type" type="radio" value="B" onChange={handleRadioChange}/>
+          <label className={styles.node_radio_label} htmlFor="optionB">B + A</label>
         </div>
         <div>
           <input id="nop" className={styles.node_form_radio} name="case-type" type="radio" value="N" onChange={handleRadioChange} />

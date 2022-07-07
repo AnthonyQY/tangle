@@ -4,12 +4,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styles from "./Node.module.css"
 
-export default function NodeManipulationReverse({ data, id }) {
+import { Buffer } from 'buffer';
+
+export default function NodeCryptographyEncodingBase64({ data, id }) {
   // Data Processing
   const processValue = ((stringData) => {
     switch(componentRadioValue) {
       case "A":
-        return [...stringData].reverse().join("");
+        return Buffer.from(stringData).toString('base64');
+      case "B":
+        return Buffer.from(stringData, 'base64').toString('ascii');
       default:
         return stringData;
     }
@@ -142,26 +146,33 @@ export default function NodeManipulationReverse({ data, id }) {
         isConnectable={hasInput === false}
         style={inputHandleStyle}
       />
-      <label className={styles.node_label}>Reverse String</label>
+
+      <label className={styles.node_label}>Base64</label>
 
       <div className={styles.tooltip}>
         <FontAwesomeIcon className = {styles.node_icon_help} icon="fa-regular fa-circle-question" size="xs"/>
         <span className={styles.tooltiptext}>
-          <h3>Reverse</h3>
-          <h4>Manipulation</h4>
+          <h3>Base64</h3>
+          <h4>Cryptography/Encoding</h4>
           <h5>[Inputs]</h5>
           <p>A (Type: String)</p>
-          <i>The string to reverse.</i>
+          <i>The String to encode/decode.</i>
           <h5>[Outputs]</h5>
           <p>A (Type: String)</p>
-          <i>The reversed string.</i>
+          <i>A string encoded in Hexadecimal.</i>
+          <h5>[Comments]</h5>
+          <p>Does not use padding.</p>
         </span>
       </div>
-
+      
       <form className={styles.node_form}>
         <div>
-          <input id="optionA" className={styles.node_form_radio} name="case-type" type="radio" value="A" onChange={handleRadioChange} defaultChecked/>
-          <label className={styles.node_radio_label} htmlFor="optionA">Reverse</label>
+          <input id="optionA" className={styles.node_form_radio} name="case-type" type="radio" value="A" onChange={handleRadioChange} defaultChecked />
+          <label className={styles.node_radio_label} htmlFor="optionA">Encode</label>
+        </div>
+        <div>
+          <input id="optionB" className={styles.node_form_radio} name="case-type" type="radio" value="B" onChange={handleRadioChange} />
+          <label className={styles.node_radio_label} htmlFor="optionB">Decode</label>
         </div>
         <div>
           <input id="nop" className={styles.node_form_radio} name="case-type" type="radio" value="N" onChange={handleRadioChange} />
@@ -174,7 +185,7 @@ export default function NodeManipulationReverse({ data, id }) {
       </div>
       <div className="category_wrapper">
         <div className={styles.node_category}>
-          <label className={styles.node_category_label}>MANIPULATION</label>
+          <label className={styles.node_category_label}>CRYPTOGRAPHY</label>
         </div>
       </div>
       <Handle 

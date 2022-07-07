@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Handle, Position, useKeyPress, useEdges, useNodes, useReactFlow, getOutgoers, getIncomers } from 'react-flow-renderer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styles from "./Node.module.css"
 
@@ -8,8 +9,8 @@ export default function NodeCryptographyHashingSHA256({ data, id }) {
   const processValue = ((stringData) => {
     switch(componentRadioValue) {
       case "A":
-        var shajs = require('sha.js')
-        return shajs('sha256').update(stringData).digest('hex');
+        var CryptoJS = require("crypto-js");
+        return CryptoJS.SHA256(stringData).toString()
       default:
         return stringData;
     }
@@ -143,6 +144,21 @@ export default function NodeCryptographyHashingSHA256({ data, id }) {
         style={inputHandleStyle}
       />
       <label className={styles.node_label}>SHA-256</label>
+
+      <div className={styles.tooltip}>
+        <FontAwesomeIcon className = {styles.node_icon_help} icon="fa-regular fa-circle-question" size="xs"/>
+        <span className={styles.tooltiptext}>
+          <h3>SHA-256</h3>
+          <h4>Cryptography/Hashing</h4>
+          <h5>[Inputs]</h5>
+          <p>A (Type: String)</p>
+          <i>The string to hash.</i>
+          <h5>[Outputs]</h5>
+          <p>A (Type: String)</p>
+          <i>The resulting hash.</i>
+        </span>
+      </div>
+
       <form className={styles.node_form}>
         <div>
           <input id="optionA" className={styles.node_form_radio} name="case-type" type="radio" value="A" onChange={handleRadioChange} defaultChecked />

@@ -1,6 +1,6 @@
 .node {
-    --node-outline-color: #00897B;
-    --node-active-outline-color: #4caca2; 
+    --node-outline-color: #FF8300;
+    --node-active-outline-color: #ffb466; 
 
     display: flex;
     flex-direction: column;
@@ -34,6 +34,16 @@
     font-size: 0.75em;
 }
 
+.node_preview_label {
+    font-size: 0.65em;
+}
+
+.node_preview_text {
+    margin-top: 0;
+
+    font-size: 0.5em;
+}
+
 .node_category {
     background-color: var(--node-outline-color);
   
@@ -50,14 +60,21 @@
     pointer-events: none;
 }
 
-.node_input {
-    width: auto;
-    border-radius: 1.5px;
-    border-style: none;
-    background: #3e3e42;
-    color: white; 
-    margin: 0.5rem 1rem;
+.node_form {
+    text-align: left;
+    margin: 0 auto;
 }
+
+.node_form_radio {
+    display: inline;
+    text-align: left;
+    transform: scale(0.5);
+}
+
+.node_radio_label {
+    font-size: 0.5rem;
+}
+
 
 .node_icon_help {
     position: absolute;

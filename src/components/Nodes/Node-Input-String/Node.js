@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Handle, Position, useKeyPress, useEdges, useNodes, useReactFlow, getOutgoers, getIncomers } from 'react-flow-renderer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styles from "./Node.module.css"
 
@@ -89,6 +90,20 @@ export default function NodeInputString({ data, id }) {
     <div className={styles.node}>
 
       <label className={styles.node_label} htmlFor="text">Input String</label>
+
+      <div className={styles.tooltip}>
+        <FontAwesomeIcon className = {styles.node_icon_help} icon="fa-regular fa-circle-question" size="xs"/>
+        <span className={styles.tooltiptext}>
+          <h3>Input String</h3>
+          <h4>Input</h4>
+          <h5>[Inputs]</h5>
+          <p>None</p>
+          <h5>[Outputs]</h5>
+          <p>A (Type: String)</p>
+          <i>The value of the text input.</i>
+        </span>
+      </div>
+
       <input id="text" className={styles.node_input} name="text" onChange={onChange}/>
       <div className="category_wrapper">
         <div className={styles.node_category}>

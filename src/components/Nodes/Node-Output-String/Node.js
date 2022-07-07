@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Handle, Position, useKeyPress, useEdges, useNodes, useReactFlow, getOutgoers, getIncomers } from 'react-flow-renderer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styles from "./Node.module.css"
 
@@ -62,10 +63,24 @@ export default function NodeOutputString({ data, id }) {
       />
 
       <label className={styles.node_label} htmlFor="text">Display String</label>
+
+      <div className={styles.tooltip}>
+        <FontAwesomeIcon className = {styles.node_icon_help} icon="fa-regular fa-circle-question" size="xs"/>
+        <span className={styles.tooltiptext}>
+          <h3>Display String</h3>
+          <h4>Output</h4>
+          <h5>[Inputs]</h5>
+          <p>A (Type: String)</p>
+          <i>The string to display.</i>
+          <h5>[Outputs]</h5>
+          <p>None</p>
+        </span>
+      </div>
+
       <input id="text" className={styles.node_text} name="text" value={componentValue} readOnly/>
       <div className="category_wrapper">
         <div className={styles.node_category}>
-          <label className={styles.node_category_label}>INPUT</label>
+          <label className={styles.node_category_label}>OUTPUT</label>
         </div>
       </div>
 

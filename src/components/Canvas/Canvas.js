@@ -112,7 +112,7 @@ export default function Canvas() {
 
         <Submenu label="Manipulation">
           <Item data="NodeManipulationChangeCase_Type" onClick={handleItemClick}>Change Case</Item>
-          <Item data="" onClick={handleItemClick}>Combine</Item>
+          <Item data="NodeManipulationCombine_Type" onClick={handleItemClick}>Combine</Item>
           <Item data="NodeManipulationReverse_Type" onClick={handleItemClick}>Reverse</Item>
         </Submenu>
 
@@ -123,16 +123,25 @@ export default function Canvas() {
             <Item data="NodeCryptographyCipherAtbash_Type" onClick={handleItemClick}>Atbash</Item>
           </Submenu>
           <Submenu label="Encryption">
-            
+            <Item data="NodeCryptographyEncryptionAES256_Type" onClick={handleItemClick}>AES-256</Item>
+            <Item data="NodeCryptographyEncryptionDES_Type" onClick={handleItemClick}>DES</Item>
+            <Item data="NodeCryptographyEncryptionRabbit_Type" onClick={handleItemClick}>Rabbit</Item>
+            <Item data="NodecryptographyEncryptionRC4_Type" onClick={handleItemClick}>RC4</Item>
+            <Item data="NodeCryptographyEncryptionRC4Drop_Type" onClick={handleItemClick}>RC4Drop</Item>
+            <Item data="NodeCryptographyEncryptionTripleDES_Type" onClick={handleItemClick}>Triple DES</Item>
           </Submenu>
 
           <Submenu label="Encoding">
             <Item data="NodeCryptographyEncodingHexadecimal_Type" onClick={handleItemClick}>Hexadecimal</Item>
-            
+            <Item data="NodeCryptographyEncodingBase64_Type" onClick={handleItemClick}>Base64</Item>
           </Submenu>
 
           <Submenu label="Hashing">
+            <Item data="NodeCryptographyHashingMD5_Type" onClick={handleItemClick}>MD-5</Item>
+            <Item data="NodeCryptographyHashingRIPEMD160_Type" onClick={handleItemClick}>RIPEMD-160</Item>
+            <Item data="NodeCryptographyHashingSHA1_Type" onClick={handleItemClick}>SHA-1</Item>
             <Item data="NodeCryptographyHashingSHA256_Type" onClick={handleItemClick}>SHA-256</Item>
+            <Item data="NodeCryptographyHashingSHA512_Type" onClick={handleItemClick}>SHA-512</Item>
           </Submenu>   
 
           <Submenu label="Logic">
@@ -142,7 +151,7 @@ export default function Canvas() {
         </Submenu>
 
         <Submenu label="Utility">
-          <Item data="" onClick={handleItemClick}>Count Substrings</Item>
+          <Item data="NodeUtilityCountSubstrings_Type" onClick={handleItemClick}>Count Substrings</Item>
         </Submenu>
 
         <Submenu label="Miscellaneous">

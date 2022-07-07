@@ -3,15 +3,17 @@
 
 <div align="center">
  
- <a href="">![GitHub](https://img.shields.io/github/license/LoliTechnologies/tangle)</a>
+ <a href="https://tangle.lolitek.com/">![GitHub](https://img.shields.io/website?up_message=online&url=https%3A%2F%2Ftangle.lolitek.com%2F)</a>
+ <a href="">![GitHub](https://img.shields.io/depfu/dependencies/github/AnthonyQY/tangle)</a>
+ <a href="">![GitHub](https://img.shields.io/github/license/anthonyqy/tangle)</a>
  
 </div>
 
 A simple, user-friendly node graph for exploring cryptography and ciphers.
 
-## Demo
+## Live Version
 
-https://lolitechnologies.github.io/tangle/
+https://tangle.lolitek.com/
 
 ## Screenshot
 ![Logo](https://i.ibb.co/PTb4dB5/demo.png)
@@ -19,6 +21,8 @@ https://lolitechnologies.github.io/tangle/
 ## Acknowledgements
 
  - [ReactFlow](https://reactflow.dev/)
- - [Logo Icon](https://www.flaticon.com/free-icons/tangle)
  - [React-Contextify](https://fkhadra.github.io/react-contexify/)
-
+ - [CryptoJS](https://www.npmjs.com/package/crypto-js)
+ - [FontAwesome](https://fontawesome.com/)
+ - [Logo Icon](https://www.flaticon.com/free-icons/tangle)
+ - [LEMONMILK Font](https://marsnev.com/)

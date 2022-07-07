@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Handle, Position, useKeyPress, useEdges, useNodes, useReactFlow, getOutgoers, getIncomers } from 'react-flow-renderer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import styles from "./Node.module.css"
 
@@ -148,6 +149,21 @@ export default function NodeCryptographyCipherAtbash({ data, id }) {
         isConnectable={hasInput === false}
         style={inputHandleStyle}
       />
+
+      <div className={styles.tooltip}>
+        <FontAwesomeIcon className = {styles.node_icon_help} icon="fa-regular fa-circle-question" size="xs"/>
+        <span className={styles.tooltiptext}>
+          <h3>Atbash</h3>
+          <h4>Cryptography/Cipher</h4>
+          <h5>[Inputs]</h5>
+          <p>A (Type: String)</p>
+          <i>The string to encipher/decipher.</i>
+          <h5>[Outputs]</h5>
+          <p>A (Type: String)</p>
+          <i>A string enciphered in Atbash.</i>
+        </span>
+      </div>
+
       <label className={styles.node_label}>Atbash</label>
       <form className={styles.node_form}>
         <div>
