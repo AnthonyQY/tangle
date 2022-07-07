@@ -15,6 +15,10 @@ A simple, user-friendly node graph for exploring cryptography and ciphers.
 
 https://tangle.lolitek.com/
 
+### Or
+
+https://anthonyqy.github.io/tangle/
+
 ## Offline Version
 
 https://github.com/AnthonyQY/tangle/releases
