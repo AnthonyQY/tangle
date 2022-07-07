@@ -23,9 +23,6 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - run: |
-       git config --global user.email "githubrunner@lolitek.com"
-       git config --global user.name "AnthonyQY"
     - name: Checkout Repo
       uses: actions/checkout@v3
       
@@ -41,4 +38,3 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@4.1.4
       with:
         branch: gh-pages # The branch the action should deploy to.
-        folder: out # The folder the action should deploy.
