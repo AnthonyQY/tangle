@@ -22,4 +22,5 @@ https://tangle.lolitek.com/
  - [ReactFlow](https://reactflow.dev/)
  - [Logo Icon](https://www.flaticon.com/free-icons/tangle)
  - [React-Contextify](https://fkhadra.github.io/react-contexify/)
+ - [CryptoJS](https://www.npmjs.com/package/crypto-js)
 
