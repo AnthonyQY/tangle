@@ -10,7 +10,7 @@
 
 A simple, user-friendly node graph for exploring cryptography and ciphers.
 
-## Demo
+## Live
 
 https://tangle.lolitek.com/
 
