@@ -25,7 +25,7 @@ jobs:
     steps:
     - run: |
        git config --global user.email "githubrunner@lolitek.com"
-       git config --global user.name "GitHub Runner"
+       git config --global user.name "AnthonyQY"
     - name: Checkout Repo
       uses: actions/checkout@v3
       
