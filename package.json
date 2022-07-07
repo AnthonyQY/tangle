@@ -1,7 +1,7 @@
 {
   "name": "tangle",
   "version": "0.1.0",
-  "homepage": "https://lolitechnologies.github.io/tangle",
+  "homepage": "https://anthonyqy.github.io/tangle",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free-regular": "^5.0.13",
