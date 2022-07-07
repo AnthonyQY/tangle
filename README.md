@@ -4,6 +4,7 @@
 <div align="center">
  
  <a href="">![GitHub](https://img.shields.io/github/license/anthonyqy/tangle)</a>
+ <a href="">![GitHub](https://img.shields.io/website?up_message=online&url=https%3A%2F%2Ftangle.lolitek.com%2F)</a>
  
 </div>
 
